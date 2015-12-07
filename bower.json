@@ -1,0 +1,19 @@
+{
+  "name": "tv-series-tracker-node-js",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Tsvetan Milanov"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

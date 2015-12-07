@@ -1,0 +1,19 @@
+{
+  "name": "tv-series-tracker-node-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs.git"
+  },
+  "author": "Tsvetan Milanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs/issues"
+  },
+  "homepage": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs#readme"
+}
