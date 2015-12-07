@@ -1,5 +1,6 @@
 'use strict';
-let bodyParser = require('body-parser'),
+let express = require('express'),
+    bodyParser = require('body-parser'),
     ejs = require('ejs'),
     viewsPath = `${__dirname}/../../public`;
 
@@ -8,5 +9,6 @@ module.exports = {
         app.use(bodyParser.json());
         app.set('views', viewsPath);
         app.engine('html', ejs.renderFile);
+        app.use(express.static(__dirname + '/public/partials'));
     }
 };
