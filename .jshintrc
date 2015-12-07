@@ -1,5 +1,7 @@
 {
   "undef": true,
   "unused": true,
-  "predef": [ "Promise", "module", "console", "Buffer", "require", "__dirname" ]
+  "esnext": true,
+  "predef": [ "Promise", "module", "console", "Buffer", "require", "__dirname" ],
+  "-W097": false
 }
