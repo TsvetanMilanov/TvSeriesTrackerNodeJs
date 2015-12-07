@@ -1,13 +1,15 @@
 'use strict';
 let express = require('express'),
-    expressConfig = require('./server/config/express-config'),
-    routeConfig = require('./server/config/routes'),
     mongooseConfig = require('./server/config/mongoose-config'),
+    expressConfig = require('./server/config/express-config'),
+    passportConfig = require('./server/config/passport-config'),
+    routeConfig = require('./server/config/routes'),
     app = express(),
     port = 4000;
 
-expressConfig.configure(app);
 mongooseConfig.configure();
+passportConfig.configure();
+expressConfig.configure(app);
 routeConfig.registerRoutes(app);
 
 app.listen(port);

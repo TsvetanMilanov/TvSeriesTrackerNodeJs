@@ -9,6 +9,6 @@ module.exports = {
         app.use(bodyParser.json());
         app.set('views', viewsPath);
         app.engine('html', ejs.renderFile);
-        app.use(express.static(__dirname + '/public/partials'));
+        app.use(express.static(__dirname + '/public/'));
     }
 };

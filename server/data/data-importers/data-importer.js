@@ -2,12 +2,12 @@
 let usersImporter = require('./users-importer');
 
 module.exports = {
-    seedInitialData: function(database, shouldSeedData) {
+    seedInitialData: function(shouldSeedData) {
         if (!shouldSeedData) {
             return;
         }
 
-        usersImporter.importUsers(database)
+        usersImporter.importUsers()
             .then(function() {
                 console.log('Users added to database!');
             })

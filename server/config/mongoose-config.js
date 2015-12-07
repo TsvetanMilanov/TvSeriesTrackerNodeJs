@@ -9,13 +9,13 @@ module.exports = {
             shouldSeedData = true,
             database;
 
+        modelsLoader.loadModels();
         mongoose.connect(connectionString);
         database = mongoose.connection;
-        modelsLoader.loadModels();
 
         database.once('open', function() {
             console.log('Database is running!');
-            dataImporter.seedInitialData(database, shouldSeedData);
+            dataImporter.seedInitialData(shouldSeedData);
         });
     }
 };

@@ -3,9 +3,9 @@ let encryption = require('./../../common/encryption'),
     constants = require('./../../common/constants');
 
 module.exports = {
-    importUsers: function(database) {
+    importUsers: function() {
         let promise = new Promise(function(resolve, reject) {
-            let User = database.model('User'),
+            let User = require('mongoose').model('User'),
                 adminUser = {},
                 regularUser = {},
                 moderatorUser = {},
