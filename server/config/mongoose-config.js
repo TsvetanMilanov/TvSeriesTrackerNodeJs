@@ -1,7 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
     modelsLoader = require('./../data/models'),
-    dataImporter = require('./../data/dataImporters/dataImporter');
+    dataImporter = require('./../data/data-importers/data-importer');
 
 module.exports = {
     configure: function() {
@@ -11,8 +11,7 @@ module.exports = {
 
         mongoose.connect(connectionString);
         database = mongoose.connection;
-
-        modelsLoader.loadModels(database);
+        modelsLoader.loadModels();
 
         database.once('open', function() {
             console.log('Database is running!');
