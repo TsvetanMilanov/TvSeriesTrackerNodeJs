@@ -46,7 +46,7 @@ app.controller('AuthenticationController', function($scope, $window, $http, $loc
 
         $http.post('/api/users', userToRegister)
             .then(function(data) {
-                toastr.success(`${data.userName} registered successfuly!`);
+                toastr.success(`${data.data.userName} registered successfuly!`);
                 $location.path('/');
             })
             .catch(function() {

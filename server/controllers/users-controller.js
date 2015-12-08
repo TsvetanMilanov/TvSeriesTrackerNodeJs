@@ -3,7 +3,9 @@ let User = require('mongoose').model('User'),
     encryption = require('./../common/encryption'),
     identity = require('./../common/identity'),
     mapper = require('./../common/mapper'),
-    constants = require('./../common/constants');
+    constants = require('./../common/constants'),
+    comparer = require('./../common/comparer'),
+    sha1 = require('sha1');
 
 module.exports = {
     createUser: function(req, res) {
@@ -188,36 +190,49 @@ module.exports = {
             });
     },
     editUser: function(req, res, next) {
-        let user = req.body,
+        let requestUser = req.body,
             currentUser = req.user,
             userId = req.params.id;
 
         User.findOne({
             _id: userId
         }, function(err, data) {
+            let databaseUser = data;
             if (err) {
                 next(err.message);
                 return;
             }
 
-            data.password = user.password || data.password;
-            data.firstName = user.firstName || data.firstName;
-            data.lastName = user.lastName || data.lastName;
+            if (requestUser.password) {
+                if (requestUser.password.length < constants.MIN_PASSWORD_LENGTH) {
+                    res.status(400)
+                        .json({
+                            message: `Password must have at least ${constants.MIN_PASSWORD_LENGTH} symbols!`
+                        });
+
+                    return;
+                }
+
+                databaseUser.password = sha1(requestUser.password);
+            }
+
+            databaseUser.firstName = requestUser.firstName || databaseUser.firstName;
+            databaseUser.lastName = requestUser.lastName || databaseUser.lastName;
 
             let isModerator = identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE);
-            if ((user.userName && (data.userName != user.userName)) ||
-                (user.isBanned && (data.isBanned != user.isBanned)) && (isModerator)) {
-                data.isBanned = user.isBanned || data.isBanned;
-                data.userName = user.userName || data.userName;
+            if (((requestUser.userName && (databaseUser.userName != requestUser.userName)) ||
+                    (requestUser.isBanned && (databaseUser.isBanned != requestUser.isBanned))) && (isModerator)) {
+                databaseUser.isBanned = requestUser.isBanned || databaseUser.isBanned;
+                databaseUser.userName = requestUser.userName || databaseUser.userName;
             }
 
             let isAdmin = identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE);
-            if (((user.userName && (data.userName != user.userName)) ||
-                    (user.roles && (data.roles != user.roles)) ||
-                    (user.registrationDate && (data.registrationDate != user.registrationDate)) ||
-                    (user.isBanned && (data.isBanned != user.isBanned)) ||
-                    (user.token && (data.token != user.token))) && (!isAdmin)) {
-
+            if (((requestUser.userName && (databaseUser.userName != requestUser.userName)) ||
+                    (requestUser.registrationDate &&
+                        (!comparer.compareDates(new Date(databaseUser.registrationDate), new Date(requestUser.registrationDate)))) ||
+                    (requestUser.roles && (!comparer.compareArrays(databaseUser.roles, requestUser.roles))) ||
+                    (requestUser.isBanned && (databaseUser.isBanned != requestUser.isBanned)) ||
+                    (requestUser.token && (databaseUser.token != requestUser.token))) && (!isAdmin)) {
                 res.status(401)
                     .json({
                         message: 'You are not authorized to change this user properties.'
@@ -225,13 +240,23 @@ module.exports = {
                 return;
             }
 
-            data.userName = user.userName || data.userName;
-            data.roles = user.roles || data.roles;
-            data.registrationDate = user.registrationDate || data.registrationDate;
-            data.isBanned = user.isBanned || data.isBanned;
-            data.token = user.token || data.token;
+            if (requestUser.userName &&
+                (requestUser.userName.length < constants.MIN_USERNAME_LENGTH ||
+                    requestUser.userName.length > constants.MAX_USERNAME_LENGTH)) {
+                res.status(400)
+                    .json({
+                        message: `Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols!`
+                    });
+                return;
+            }
 
-            data.save(function(err, savedUser) {
+            databaseUser.userName = requestUser.userName || databaseUser.userName;
+            databaseUser.roles = requestUser.roles || databaseUser.roles;
+            databaseUser.registrationDate = requestUser.registrationDate || databaseUser.registrationDate;
+            databaseUser.isBanned = requestUser.isBanned || databaseUser.isBanned;
+            databaseUser.token = requestUser.token || databaseUser.token;
+
+            databaseUser.save(function(err, savedUser) {
                 if (err) {
                     next(err.message);
                     return;
