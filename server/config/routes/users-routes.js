@@ -7,6 +7,7 @@ module.exports = function(app) {
     let router = express.Router();
 
     router
+        .get('/banned', identity.requiresAuthentication(), usersController.getBannedUsers)
         .get('/:id', identity.requiresAuthentication(), usersController.getById)
         .get('/', identity.requiresAuthentication(), usersController.getAllUsers)
         .post('/', usersController.createUser)

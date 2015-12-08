@@ -265,5 +265,26 @@ module.exports = {
                 res.json(mapper.mapToUserResponseModel(savedUser));
             });
         });
+    },
+    getBannedUsers: function(req, res, next) {
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE)) {
+            res.status(401)
+                .json({
+                    message: 'Your are not authorized to do this operaation!'
+                });
+
+            return;
+        }
+
+        User.find({
+            isBanned: true
+        }, function(err, data) {
+            if (err) {
+                next(err.message);
+                return;
+            }
+
+            res.json(data);
+        });
     }
 };

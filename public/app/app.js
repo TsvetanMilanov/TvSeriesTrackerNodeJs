@@ -13,6 +13,11 @@ app.config(function($routeProvider) {
                 return routeAuthorizationChecker.isAuthorizedForRole(constants.MODERATOR_ROLE);
             }
         },
+        isModeratorOrAdmin: {
+            authenticate: function(routeAuthorizationChecker) {
+                return routeAuthorizationChecker.isModeratorOrAdmin();
+            }
+        },
         isAuthenticated: {
             authenticate: function(routeAuthorizationChecker) {
                 return routeAuthorizationChecker.isAuthenticated();
@@ -40,6 +45,11 @@ app.config(function($routeProvider) {
             templateUrl: '/partials/profile',
             controller: 'ProfileController',
             resolve: routeAuthoChecker.isAuthenticated
+        })
+        .when('/administration', {
+            templateUrl: '/partials/administration',
+            controller: 'AdministrationController',
+            resolve: routeAuthoChecker.isModeratorOrAdmin
         })
         .when('/', {
             templateUrl: '/partials/home',

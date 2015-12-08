@@ -1,0 +1,5 @@
+.wrap-text {
+    max-width: 100px;
+    overflow: auto;
+    white-space: nowrap;
+}
