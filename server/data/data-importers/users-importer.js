@@ -35,7 +35,7 @@ module.exports = {
 
                         bannedUser.userName = 'banned';
                         bannedUser.password = encryption.createHash('banned');
-                        bannedUser.roles = [constants.ADMIN_ROLE, constants.USER_ROLE];
+                        bannedUser.roles = [constants.USER_ROLE];
                         bannedUser.firstName = 'Banned';
                         bannedUser.lastName = 'User';
 

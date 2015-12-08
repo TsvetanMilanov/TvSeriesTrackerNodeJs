@@ -1,16 +1,13 @@
 'use strict';
 let express = require('express'),
-    mongoose = require('mongoose');
+    usersController = require('./../../controllers/users-controller');
 
 module.exports = function(app) {
-    let router = express.Router(),
-        User = mongoose.model('User');
+    let router = express.Router();
 
-    router.get('/', function(req, res) {
-        res.json({
-            result: User.find({})
-        });
-    });
+    router
+        .get('/', usersController.getAllUsers)
+        .post('/', usersController.createUser);
 
     app.use('/api/users', router);
 };

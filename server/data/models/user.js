@@ -7,8 +7,8 @@ module.exports = function() {
         userName: {
             type: String,
             required: true,
-            minLength: 3,
-            maxLength: 20
+            minLength: constants.MIN_USERNAME_LENGTH,
+            maxLength: constants.MAX_USERNAME_LENGTH
         },
         password: {
             type: String,
