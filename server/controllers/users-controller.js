@@ -23,7 +23,11 @@ module.exports = {
 
         User.create(user, function(err, data) {
             if (err) {
-                next(err.message);
+                res.status(400)
+                    .json({
+                        message: 'Invalid registration information.'
+                    });
+                    
                 return;
             }
 
