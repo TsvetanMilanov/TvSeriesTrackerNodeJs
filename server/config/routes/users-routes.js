@@ -7,7 +7,8 @@ module.exports = function(app) {
 
     router
         .get('/', usersController.getAllUsers)
-        .post('/', usersController.createUser);
+        .post('/', usersController.createUser)
+        .put('/', usersController.loginUser);
 
     app.use('/api/users', router);
 };
