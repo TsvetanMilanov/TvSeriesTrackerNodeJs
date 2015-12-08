@@ -1,6 +1,6 @@
 /*globals angular*/
 'use strict';
-var app = angular.module('app', ['ngRoute', 'ngAnimate', 'toastr']);
+var app = angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {

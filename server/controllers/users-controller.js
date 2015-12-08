@@ -177,6 +177,7 @@ module.exports = {
                 });
             })
             .catch(function(err) {
+                console.log(err);
                 res.status(400)
                     .json(err);
             });

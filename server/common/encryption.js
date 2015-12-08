@@ -1,11 +1,9 @@
 'use strict';
-let crypto = require('crypto');
+let sha1 = require('sha1');
 
 module.exports = {
-    createHash: function(text, key) {
-        key = key || 'magic unicorns key';
-
-        let hash = crypto.createHmac('sha1', key).update(text).digest('hex');
+    createHash: function(text) {
+        let hash = sha1(text);
 
         return hash;
     }
