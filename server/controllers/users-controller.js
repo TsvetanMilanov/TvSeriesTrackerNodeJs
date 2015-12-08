@@ -32,6 +32,15 @@ module.exports = {
         });
     },
     getAllUsers: function(req, res, next) {
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE)) {
+            res.status(401)
+                .json({
+                    message: 'Your are not authorized to do this operaation!'
+                });
+
+            return;
+        }
+
         User.find({}, function(err, data) {
             if (err) {
                 next(err.message);
@@ -39,6 +48,30 @@ module.exports = {
             }
 
             res.json(data);
+        });
+    },
+    getById: function(req, res, next) {
+        let user = req.user,
+            isAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE);
+
+        if ((user._id != req.params.id) && !isAdmin) {
+            res.status(401)
+                .json({
+                    message: 'Your are not authorized to get this information!'
+                });
+
+            return;
+        }
+
+        User.findOne({
+            _id: req.params.id
+        }, function(err, data) {
+            if (err) {
+                next(err.message);
+                return;
+            }
+
+            res.json(mapper.mapToUserResponseModel(data));
         });
     },
     loginUser: function(req, res, next) {

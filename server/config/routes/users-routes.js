@@ -7,7 +7,8 @@ module.exports = function(app) {
     let router = express.Router();
 
     router
-        .get('/', usersController.getAllUsers)
+        .get('/:id', identity.requiresAuthentication(), usersController.getById)
+        .get('/', identity.requiresAuthentication(), usersController.getAllUsers)
         .post('/', usersController.createUser)
         .put('/token', usersController.loginUser)
         .put('/:id', identity.requiresAuthentication(), usersController.editUser);
