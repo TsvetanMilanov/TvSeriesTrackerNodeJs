@@ -4,11 +4,11 @@ app.controller('AuthenticationController', function($scope, $window, $http, $loc
     $scope.identity = identity;
 
     $scope.loginUser = function(user) {
-        let copiedUser = user;
+        var copiedUser = user;
         copiedUser.password = sha1(copiedUser.password);
         $http.put('/api/users/token', user)
             .then(function(data) {
-                let identityUser = data.data;
+                var identityUser = data.data;
 
                 identity.currentUser = identityUser;
                 $window.localStorage.setItem(constants.CURRENT_USER_LOCAL_STORAGE_KEY, JSON.stringify(identityUser));
@@ -17,7 +17,7 @@ app.controller('AuthenticationController', function($scope, $window, $http, $loc
                 toastr.success('Login successful!');
                 $location.path('/');
             })
-            .catch(function(err) {
+            .catch(function() {
                 toastr.error('Invalid username or password!');
             });
     };

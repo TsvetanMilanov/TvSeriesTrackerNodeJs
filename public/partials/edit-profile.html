@@ -1,57 +1,57 @@
 <div class="container col-md-10">
     <form class="form-horizontal" name="registerForm">
         <fieldset>
-            <legend>Profile</legend>
+            <legend>Edit profile</legend>
             <div class="form-group">
                 <label for="inputUserName" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputUserName" value="{{currentUser.userName}}" disabled>
+                    <input type="text" class="form-control" id="inputUserName" ng-model="user.userName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="inputPassword" value="" disabled>
+                    <input type="password" class="form-control" id="inputPassword" ng-model="user.password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputFirstName" class="col-lg-2 control-label">First name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputFirstName" value="{{currentUser.firstName}}" disabled>
+                    <input type="text" class="form-control" id="inputFirstName" ng-model="user.firstName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-lg-2 control-label">Last name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" value="{{currentUser.lastName}}" disabled>
+                    <input type="text" class="form-control" id="inputLastName" ng-model="user.lastName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputRegistrationDate" class="col-lg-2 control-label">Registration date</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRegistrationDate" value="{{currentUser.registrationDate}}" disabled>
+                    <input type="text" class="form-control" id="inputRegistrationDate"  ng-model="user.registrationDate">
                 </div>
             </div>
             <div class="form-group" ng-show="identity.isAdmin()">
                 <label for="inputToken" class="col-lg-2 control-label">Token</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputToken" value="{{currentUser.token}}" disabled>
+                    <input type="text" class="form-control" id="inputToken" ng-model="user.token">
                 </div>
             </div>
             <div class="form-group" ng-show="identity.isAdmin()">
                 <label for="inputRoles" class="col-lg-2 control-label">Roles</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRoles" value="{{currentUser.roles}}">
+                    <input type="text" class="form-control" id="inputRoles" ng-model="user.rolesJson">
                 </div>
             </div>
             <div class="form-group" ng-show="identity.isAdmin() || identity.isModerator()">
                 <label for="inputIsBaned" class="col-lg-2 control-label">Banned</label>
                 <div class="col-lg-10">
-                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="currentUser.isBanned" disabled>
+                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="currentUser.isBanned"  ng-model="user.isBanned">
                 </div>
             </div>
             <div class="col-lg-10 col-lg-offset-2">
-                <a href="#/users/profile/{{currentUser._id}}/edit" class="btn btn-success">Edit</a>
+                <button class="btn btn-success" ng-click="editUser(user)">Edit</button>
             </div>
 </div>
 </fieldset>

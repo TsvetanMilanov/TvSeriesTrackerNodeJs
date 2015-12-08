@@ -2,7 +2,7 @@
 'use strict';
 var app = angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
-    let routeAuthoChecker = {
+    var routeAuthoChecker = {
         isAdmin: {
             authenticate: function(routeAuthorizationChecker, constants) {
                 return routeAuthorizationChecker.isAuthorizedForRole(constants.ADMIN_ROLE);
@@ -30,6 +30,11 @@ app.config(function($routeProvider) {
             templateUrl: '/partials/register',
             controller: 'AuthenticationController',
             resolve: routeAuthoChecker.isNotAuthenticated
+        })
+        .when('/users/profile/:id/edit', {
+            templateUrl: '/partials/edit-profile',
+            controller: 'EditProfileController',
+            resolve: routeAuthoChecker.isAuthenticated
         })
         .when('/users/profile/:id', {
             templateUrl: '/partials/profile',
