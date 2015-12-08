@@ -1,6 +1,7 @@
 'use strict';
 let express = require('express'),
-    usersController = require('./../../controllers/users-controller');
+    usersController = require('./../../controllers/users-controller'),
+    identity = require('./../../common/identity');
 
 module.exports = function(app) {
     let router = express.Router();
@@ -8,7 +9,8 @@ module.exports = function(app) {
     router
         .get('/', usersController.getAllUsers)
         .post('/', usersController.createUser)
-        .put('/', usersController.loginUser);
+        .put('/token', usersController.loginUser)
+        .put('/:id', identity.requiresAuthentication(), usersController.editUser);
 
     app.use('/api/users', router);
 };

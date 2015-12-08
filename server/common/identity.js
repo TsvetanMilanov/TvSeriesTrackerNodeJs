@@ -52,5 +52,8 @@ module.exports = {
         });
 
         return promise;
+    },
+    isAuthorizedForRole: function(user, role) {
+        return user.roles.indexOf(role) > -1;
     }
 };

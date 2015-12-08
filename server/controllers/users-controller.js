@@ -1,8 +1,9 @@
 'use strict';
 let User = require('mongoose').model('User'),
-    Token = require('mongoose').model('Token'),
     encryption = require('./../common/encryption'),
-    identity = require('./../common/identity');
+    identity = require('./../common/identity'),
+    mapper = require('./../common/mapper'),
+    constants = require('./../common/constants');
 
 module.exports = {
     createUser: function(req, res, next) {
@@ -73,19 +74,66 @@ module.exports = {
                         return;
                     }
 
-                    res.json({
-                        _id: user._id,
-                        userName: user.userName,
-                        token: token.token,
-                        firstName: user.firstName,
-                        lastName: user.lastName,
-                        roles: user.roles
-                    });
+                    res.json(mapper.mapToUserResponseModel(user));
                 });
             })
             .catch(function(err) {
                 res.status(400)
                     .json(err);
             });
+    },
+    editUser: function(req, res, next) {
+        let user = req.body,
+            currentUser = req.user,
+            userId = req.params.id;
+
+        User.findOne({
+            _id: userId
+        }, function(err, data) {
+            if (err) {
+                next(err.message);
+                return;
+            }
+
+            data.password = user.password || data.password;
+            data.firstName = user.firstName || data.firstName;
+            data.lastName = user.lastName || data.lastName;
+
+            let isModerator = identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE);
+            if ((user.userName && (data.userName != user.userName)) ||
+                (user.isBanned && (data.isBanned != user.isBanned)) && (isModerator)) {
+                data.isBanned = user.isBanned || data.isBanned;
+                data.userName = user.userName || data.userName;
+            }
+
+            let isAdmin = identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE);
+            if (((user.userName && (data.userName != user.userName)) ||
+                    (user.roles && (data.roles != user.roles)) ||
+                    (user.registrationDate && (data.registrationDate != user.registrationDate)) ||
+                    (user.isBanned && (data.isBanned != user.isBanned)) ||
+                    (user.token && (data.token != user.token))) && (!isAdmin)) {
+
+                res.status(401)
+                    .json({
+                        message: 'You are not authorized to change this user properties.'
+                    });
+                return;
+            }
+
+            data.userName = user.userName || data.userName;
+            data.roles = user.roles || data.roles;
+            data.registrationDate = user.registrationDate || data.registrationDate;
+            data.isBanned = user.isBanned || data.isBanned;
+            data.token = user.token || data.token;
+
+            data.save(function(err, savedUser) {
+                if (err) {
+                    next(err.message);
+                    return;
+                }
+
+                res.json(mapper.mapToUserResponseModel(savedUser));
+            });
+        });
     }
 };
