@@ -74,6 +74,72 @@ module.exports = {
             res.json(mapper.mapToUserResponseModel(data));
         });
     },
+    banUser: function(req, res, next) {
+        let user = req.user,
+            isAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE),
+            isModerator = identity.isAuthorizedForRole(user, constants.MODERATOR_ROLE);
+
+        if (!isAdmin && !isModerator) {
+            res.status(401)
+                .json({
+                    message: 'Your are not authorized to do this operation!'
+                });
+
+            return;
+        }
+
+        User.findOne({
+            _id: req.params.id
+        }, function(err, data) {
+            if (err) {
+                next(err.message);
+                return;
+            }
+
+            data.isBanned = true;
+            data.save(function(err, bannedUser) {
+                if (err) {
+                    next(err.message);
+                    return;
+                }
+
+                res.json(mapper.mapToUserResponseModel(bannedUser));
+            });
+        });
+    },
+    unBanUser: function(req, res, next) {
+        let user = req.user,
+            isAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE),
+            isModerator = identity.isAuthorizedForRole(user, constants.MODERATOR_ROLE);
+
+        if (!isAdmin && !isModerator) {
+            res.status(401)
+                .json({
+                    message: 'Your are not authorized to do this operation!'
+                });
+
+            return;
+        }
+
+        User.findOne({
+            _id: req.params.id
+        }, function(err, data) {
+            if (err) {
+                next(err.message);
+                return;
+            }
+
+            data.isBanned = false;
+            data.save(function(err, bannedUser) {
+                if (err) {
+                    next(err.message);
+                    return;
+                }
+
+                res.json(mapper.mapToUserResponseModel(bannedUser));
+            });
+        });
+    },
     loginUser: function(req, res, next) {
         let userName = req.body.userName,
             password = req.body.password,

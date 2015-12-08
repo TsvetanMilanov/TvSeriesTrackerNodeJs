@@ -11,6 +11,8 @@ module.exports = function(app) {
         .get('/', identity.requiresAuthentication(), usersController.getAllUsers)
         .post('/', usersController.createUser)
         .put('/token', usersController.loginUser)
+        .put('/ban/:id', identity.requiresAuthentication(), usersController.banUser)
+        .put('/unBan/:id', identity.requiresAuthentication(), usersController.unBanUser)
         .put('/:id', identity.requiresAuthentication(), usersController.editUser);
 
     app.use('/api/users', router);
