@@ -10,6 +10,7 @@ app.factory('constants', function() {
         MAX_USERNAME_LENGTH: 20,
         MIN_PASSWORD_LENGTH: 6,
         MIN_TOKEN_LENGTH: 10,
-        TOKEN_LENGTH: 200
+        TOKEN_LENGTH: 200,
+        DEFAULT_DATE_FORMAT: 'd-MM-YYYY hh:mm:ss'
     };
 });

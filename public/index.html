@@ -26,18 +26,6 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="#/">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/">Action</a></li>
-                                <li><a href="#/">Another action</a></li>
-                                <li><a href="#/">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#/">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#/">One more separated link</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <form class="navbar-form navbar-right" role="login">
                         <div ng-hide="identity.isAuthenticated()">
@@ -70,6 +58,7 @@
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/lib/toastr/toastr.js"></script>
+    <script src="/lib/moment/moment.js"></script>
     <!-- <script src="/lib/bootstrap/js/tab.js"></script> -->
     <script src="/lib/js-sha1/src/sha1.js"></script>
     <script src="/lib/angular/angular.js"></script>
@@ -80,8 +69,10 @@
     <script src="/app/utilities/constants.js"></script>
     <script src="/app/utilities/identity.js"></script>
     <script src="/app/utilities/route-authorization-checker.js"></script>
+    <script src="/app/utilities/request-helper.js"></script>
     <script src="/app/controllers/home-controller.js"></script>
     <script src="/app/controllers/authentication-controller.js"></script>
+    <script src="/app/controllers/profile-controller.js"></script>
 </body>
 
 </html>

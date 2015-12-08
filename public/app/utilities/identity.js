@@ -23,6 +23,9 @@ app.factory('identity', function($window, constants) {
         },
         isAdmin: function() {
             return !!this.currentUser && this.currentUser.roles.indexOf(constants.ADMIN_ROLE) > -1;
+        },
+        isModerator: function() {
+            return !!this.currentUser && this.currentUser.roles.indexOf(constants.MODERATOR_ROLE) > -1;
         }
     };
 });

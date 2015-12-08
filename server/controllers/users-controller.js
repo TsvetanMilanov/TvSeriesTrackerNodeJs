@@ -6,7 +6,7 @@ let User = require('mongoose').model('User'),
     constants = require('./../common/constants');
 
 module.exports = {
-    createUser: function(req, res, next) {
+    createUser: function(req, res) {
         let modelValidator = require('./../common/model-validator'),
             user = req.body;
 
@@ -27,7 +27,7 @@ module.exports = {
                     .json({
                         message: 'Invalid registration information.'
                     });
-                    
+
                 return;
             }
 
@@ -56,9 +56,10 @@ module.exports = {
     },
     getById: function(req, res, next) {
         let user = req.user,
-            isAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE);
+            isAdmin = identity.isAuthorizedForRole(user, constants.ADMIN_ROLE),
+            isModerator = identity.isAuthorizedForRole(user, constants.MODERATOR_ROLE);
 
-        if ((user._id != req.params.id) && !isAdmin) {
+        if ((user._id != req.params.id) && (!isAdmin && !isModerator)) {
             res.status(401)
                 .json({
                     message: 'Your are not authorized to get this information!'

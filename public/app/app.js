@@ -31,6 +31,11 @@ app.config(function($routeProvider) {
             controller: 'AuthenticationController',
             resolve: routeAuthoChecker.isNotAuthenticated
         })
+        .when('/users/profile/:id', {
+            templateUrl: '/partials/profile',
+            controller: 'ProfileController',
+            resolve: routeAuthoChecker.isAuthenticated
+        })
         .when('/', {
             templateUrl: '/partials/home',
             controller: 'HomeController'

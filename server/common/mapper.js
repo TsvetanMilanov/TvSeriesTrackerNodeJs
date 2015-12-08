@@ -7,7 +7,9 @@ module.exports = {
             token: user.token,
             firstName: user.firstName,
             lastName: user.lastName,
-            roles: user.roles
+            roles: user.roles,
+            registrationDate: user.registrationDate,
+            isBanned: user.isBanned
         };
 
         return result;

@@ -38,6 +38,7 @@ module.exports = {
                         bannedUser.roles = [constants.USER_ROLE];
                         bannedUser.firstName = 'Banned';
                         bannedUser.lastName = 'User';
+                        bannedUser.isBanned = true;
 
                         usersToCreate = [adminUser, moderatorUser, regularUser, bannedUser];
 
