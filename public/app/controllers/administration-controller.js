@@ -6,7 +6,7 @@ app.controller('AdministrationController', function($scope, $location, $http, id
     $scope.getAllUsers = function() {
         var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
-        if (!identity.isAdmin()) {
+        if (!identity.isAdmin() && !identity.isModerator()) {
             toastr.error('You are not authorized to do that!!!');
             $location.path('/');
             return;
@@ -19,7 +19,7 @@ app.controller('AdministrationController', function($scope, $location, $http, id
                 $scope.users = data.data;
             })
             .catch(function(err) {
-                toastr.error(`There was an error while trying to get all users. ${err}`);
+                toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err)}`);
                 $location.path('/');
             });
     };
@@ -27,7 +27,7 @@ app.controller('AdministrationController', function($scope, $location, $http, id
     $scope.getBannedUsers = function() {
         var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
-        if (!identity.isAdmin()) {
+        if (!identity.isAdmin() && !identity.isModerator()) {
             toastr.error('You are not authorized to do that!!!');
             $location.path('/');
             return;
@@ -40,7 +40,7 @@ app.controller('AdministrationController', function($scope, $location, $http, id
                 $scope.users = data.data;
             })
             .catch(function(err) {
-                toastr.error(`There was an error while trying to get banned users. ${err}`);
+                toastr.error(`There was an error while trying to get banned users. ${JSON.stringify(err)}`);
                 $location.path('/');
             });
     };

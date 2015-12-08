@@ -31,8 +31,8 @@ app.controller('EditProfileController', function($scope, $http, $routeParams, $l
 
                 if (editedUser.userName.length < constants.MIN_USERNAME_LENGTH ||
                     editedUser.userName.length > constants.MAX_USERNAME_LENGTH) {
-                        toastr.info(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols.`);
-                        return;
+                    toastr.info(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols.`);
+                    return;
                 }
 
                 editedUser.registrationDate = new Date(editedUser.registrationDate);
@@ -42,7 +42,10 @@ app.controller('EditProfileController', function($scope, $http, $routeParams, $l
                     })
                     .then(function(data) {
                         var responseUser = data.data;
-                        identity.currentUser = responseUser;
+                        if (identity.currentUser.token == responseUser.token) {
+                            identity.currentUser = responseUser;
+                        }
+
                         $scope.identity = identity;
 
                         toastr.success(`User ${responseUser.userName} edited successfully!`);

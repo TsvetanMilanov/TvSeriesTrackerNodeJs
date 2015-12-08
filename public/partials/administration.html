@@ -1,12 +1,12 @@
 <div class="container">
     <ul class="nav nav-tabs" id="tabs">
-        <li class="active"><a href="#users" data-toggle="tab" ng-show="identity.isAdmin()">Users</a></li>
+        <li class="active"><a href="#users" data-toggle="tab">Users</a></li>
         <li><a href="#reported-tv-series" data-toggle="tab">Reported TV Series</a></li>
         <li><a href="#reported-episodes" data-toggle="tab">Reported Episodes</a></li>
         <li><a href="#statistics" data-toggle="tab">Statistics</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="users" ng-show="identity.isAdmin()">
+        <div class="tab-pane fade active in" id="users">
             <div ng-include src="'partials/users-administration'"></div>
         </div>
         <div class="tab-pane fade" id="reported-tv-series">

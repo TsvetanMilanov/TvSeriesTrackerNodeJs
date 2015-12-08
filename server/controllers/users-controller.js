@@ -38,10 +38,11 @@ module.exports = {
         });
     },
     getAllUsers: function(req, res, next) {
-        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE)) {
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(req.user, constants.MODERATOR_ROLE)) {
             res.status(401)
                 .json({
-                    message: 'Your are not authorized to do this operaation!'
+                    message: 'Your are not authorized to do this operation!'
                 });
 
             return;
@@ -231,7 +232,7 @@ module.exports = {
                     (requestUser.registrationDate &&
                         (!comparer.compareDates(new Date(databaseUser.registrationDate), new Date(requestUser.registrationDate)))) ||
                     (requestUser.roles && (!comparer.compareArrays(databaseUser.roles, requestUser.roles))) ||
-                    (requestUser.isBanned && (databaseUser.isBanned != requestUser.isBanned)) ||
+                    (databaseUser.isBanned != requestUser.isBanned) ||
                     (requestUser.token && (databaseUser.token != requestUser.token))) && (!isAdmin)) {
                 res.status(401)
                     .json({
@@ -253,7 +254,7 @@ module.exports = {
             databaseUser.userName = requestUser.userName || databaseUser.userName;
             databaseUser.roles = requestUser.roles || databaseUser.roles;
             databaseUser.registrationDate = requestUser.registrationDate || databaseUser.registrationDate;
-            databaseUser.isBanned = requestUser.isBanned || databaseUser.isBanned;
+            databaseUser.isBanned = requestUser.isBanned;
             databaseUser.token = requestUser.token || databaseUser.token;
 
             databaseUser.save(function(err, savedUser) {
@@ -267,7 +268,8 @@ module.exports = {
         });
     },
     getBannedUsers: function(req, res, next) {
-        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE)) {
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(req.user, constants.MODERATOR_ROLE)) {
             res.status(401)
                 .json({
                     message: 'Your are not authorized to do this operaation!'
