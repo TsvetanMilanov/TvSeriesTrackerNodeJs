@@ -48,8 +48,11 @@ module.exports = {
                                 return;
                             }
 
+                            console.log('Users added to database!');
                             resolve(data);
                         });
+                    } else {
+                        resolve();
                     }
                 });
         });

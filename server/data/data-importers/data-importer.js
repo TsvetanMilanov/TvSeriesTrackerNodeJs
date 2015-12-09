@@ -1,5 +1,6 @@
 'use strict';
-let usersImporter = require('./users-importer');
+let usersImporter = require('./users-importer'),
+    tvSeriesImporter = require('./tv-series-importer');
 
 module.exports = {
     seedInitialData: function(shouldSeedData) {
@@ -9,10 +10,12 @@ module.exports = {
 
         usersImporter.importUsers()
             .then(function() {
-                console.log('Users added to database!');
+                return tvSeriesImporter.importTvSeries();
             })
-            .catch(function(error) {
-                console.log(error);
+            .then(function() {
+            })
+            .catch(function(err) {
+                console.log(err);
             });
     }
 };
