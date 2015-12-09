@@ -1,5 +1,6 @@
 'use strict';
 let usersImporter = require('./users-importer'),
+    episodesImporter = require('./episodes-importer'),
     tvSeriesImporter = require('./tv-series-importer');
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
                 return tvSeriesImporter.importTvSeries();
             })
             .then(function() {
+                return episodesImporter.importEpisodes();
             })
             .catch(function(err) {
                 console.log(err);

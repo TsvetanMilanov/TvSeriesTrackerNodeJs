@@ -1,4 +1,5 @@
 'use strict';
+let randomGenerator = require('./../../common/random-generator');
 
 module.exports = {
     importTvSeries: function() {
@@ -9,6 +10,8 @@ module.exports = {
             TvSeries.find()
                 .then(function(data) {
                     if (data.length <= 0) {
+                        console.log('Adding Tv Series to database.');
+                        
                         User.find({}, function(err, users) {
                             if (err) {
                                 console.log(err);
@@ -23,7 +26,7 @@ module.exports = {
                                     let currentTvSeries = {
                                         title: `TV series title #${i}`,
                                         rating: i % 10,
-                                        releaseDate: new Date(2015 - (i % 10), 11 - (i % 10), 28 - (i % 20)),
+                                        releaseDate: randomGenerator.generateRandomDate(i),
                                         runtimeMinutes: i % 2 === 0 ? 40 : 20,
                                         authorId: users[i % usersCount]._id,
                                         description: `Default Tv Series description #${i}`

@@ -15,6 +15,8 @@ module.exports = {
             User.find()
                 .then(function(data) {
                     if (data.length <= 0) {
+                        console.log('Adding Users to database.');
+                        
                         adminUser.userName = 'admin';
                         adminUser.password = encryption.createHash(encryption.createHash('admin'));
                         adminUser.roles = [constants.ADMIN_ROLE, constants.USER_ROLE];
