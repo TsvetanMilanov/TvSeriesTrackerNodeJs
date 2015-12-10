@@ -28,5 +28,39 @@ module.exports = {
 
             res.json(episodes);
         });
+    },
+    getById: function(req, res) {
+        Episode.find({
+            _id: req.params.id
+        }, function(err, data) {
+            if (err) {
+                console.log(err);
+                res.status(404)
+                    .json({
+                        message: 'Episode not found!'
+                    });
+                return;
+            }
+
+            res.json(data);
+        });
+    },
+    getBySeasonAndNumber: function(req, res) {
+        Episode.find({
+            tvSeriesId: req.params.tvSeriesId,
+            seasonNumber: req.params.season,
+            number: req.params.episode
+        }, function(err, data) {
+            if (err) {
+                console.log(err);
+                res.status(404)
+                    .json({
+                        message: 'Episode not found!'
+                    });
+                return;
+            }
+
+            res.json(data);
+        });
     }
 };

@@ -7,15 +7,17 @@ module.exports = function(app) {
     let router = express.Router();
 
     router
+        .get('/getBySeasonAndNumber/:tvSeriesId/:season/:episode', episodesController.getBySeasonAndNumber)
+        .get('/:id', episodesController.getById)
         .get('/', identity.requiresAuthentication(), episodesController.getAll);
-        // .get('/banned', identity.requiresAuthentication(), usersController.getBannedUsers)
-        // .get('/:id', identity.requiresAuthentication(), usersController.getById)
-        // .get('/', identity.requiresAuthentication(), usersController.getAllUsers)
-        // .post('/', usersController.createUser)
-        // .put('/token', usersController.loginUser)
-        // .put('/ban/:id', identity.requiresAuthentication(), usersController.banUser)
-        // .put('/unBan/:id', identity.requiresAuthentication(), usersController.unBanUser)
-        // .put('/:id', identity.requiresAuthentication(), usersController.editUser);
+    // .get('/banned', identity.requiresAuthentication(), usersController.getBannedUsers)
+    // .get('/:id', identity.requiresAuthentication(), usersController.getById)
+    // .get('/', identity.requiresAuthentication(), usersController.getAllUsers)
+    // .post('/', usersController.createUser)
+    // .put('/token', usersController.loginUser)
+    // .put('/ban/:id', identity.requiresAuthentication(), usersController.banUser)
+    // .put('/unBan/:id', identity.requiresAuthentication(), usersController.unBanUser)
+    // .put('/:id', identity.requiresAuthentication(), usersController.editUser);
 
     app.use('/api/episodes', router);
 };
