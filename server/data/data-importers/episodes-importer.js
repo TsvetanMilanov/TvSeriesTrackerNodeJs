@@ -34,26 +34,23 @@ module.exports = {
                                 return;
                             }
 
-                            for (let i = 0; i < users.length; i++) {
-                                let currentUser = users[i];
+                            for (let j = 0; j < tvSeries.length; j++) {
+                                let currentUser = users[j % (users.length - 1)],
+                                    currentTvSeries = tvSeries[j];
 
-                                for (let j = 0; j < tvSeries.length; j++) {
-                                    let currentTvSeries = tvSeries[j];
+                                for (let k = 0; k < 5; k++) {
+                                    for (let l = 0; l < 20; l++) {
+                                        let episode = {
+                                            title: `Episode title s${k}e${l}`,
+                                            seasonNumber: k,
+                                            number: l,
+                                            airDate: randomGenerator.generateRandomDate(l),
+                                            tvSeriesId: currentTvSeries._id,
+                                            authorId: currentUser._id,
+                                            description: `Episode description # s${k}e${l}`
+                                        };
 
-                                    for (let k = 0; k < 5; k++) {
-                                        for (let l = 0; l < 20; l++) {
-                                            let episode = {
-                                                title: `Episode title s${k}e${l}`,
-                                                seasonNumber: k,
-                                                number: l,
-                                                airDate: randomGenerator.generateRandomDate(l),
-                                                tvSeriesId: currentTvSeries._id,
-                                                authorId: currentUser._id,
-                                                description: `Episode description # s${k}e${l}`
-                                            };
-
-                                            episodesToSave.push(episode);
-                                        }
+                                        episodesToSave.push(episode);
                                     }
                                 }
                             }
