@@ -30,7 +30,7 @@ module.exports = {
         });
     },
     getById: function(req, res) {
-        Episode.find({
+        Episode.findOne({
             _id: req.params.id
         }, function(err, data) {
             if (err) {
@@ -45,11 +45,9 @@ module.exports = {
             res.json(data);
         });
     },
-    getBySeasonAndNumber: function(req, res) {
+    getByTvSeriesId: function(req, res) {
         Episode.find({
-            tvSeriesId: req.params.tvSeriesId,
-            seasonNumber: req.params.season,
-            number: req.params.episode
+            tvSeriesId: req.params.id
         }, function(err, data) {
             if (err) {
                 console.log(err);
@@ -61,6 +59,27 @@ module.exports = {
             }
 
             res.json(data);
+        });
+    },
+    getByTvSeriesIdSeasonAndNumber: function(req, res) {
+        let id = req.params.tvSeriesId,
+            season = req.params.season,
+            number = req.params.number;
+        Episode.findOne({
+            tvSeriesId: id,
+            seasonNumber: season,
+            number: number
+        }, function(err, episode) {
+            if (err) {
+                console.log(err);
+                res.status(404)
+                    .json({
+                        message: 'No TV Series found!'
+                    });
+                return;
+            }
+
+            res.json(episode);
         });
     }
 };
