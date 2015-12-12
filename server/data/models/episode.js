@@ -9,7 +9,7 @@ module.exports = function() {
             type: String,
             required: true
         },
-        releaseDate: {
+        airDate: {
             type: Date
         },
         seasonNumber: {
