@@ -1,10 +1,11 @@
 (function() {
     'use strict';
 
-    function AuthenticationController($scope, $window, $http, $location, toastr, sha1, identity, constants) {
-        $scope.identity = identity;
+    function AuthenticationController($window, $http, $location, toastr, sha1, identity, constants) {
+        var vm = this;
+        vm.identity = identity;
 
-        $scope.loginUser = function(user) {
+        vm.loginUser = function(user) {
             var copiedUser = user;
             copiedUser.password = sha1(copiedUser.password);
             $http.put('/api/users/token', user)
@@ -13,7 +14,7 @@
 
                     identity.currentUser = identityUser;
                     $window.localStorage.setItem(constants.CURRENT_USER_LOCAL_STORAGE_KEY, JSON.stringify(identityUser));
-                    $scope.identity = identity;
+                    vm.identity = identity;
 
                     toastr.success('Login successful!');
                     $location.path('/');
@@ -23,16 +24,16 @@
                 });
         };
 
-        $scope.logoutUser = function() {
+        vm.logoutUser = function() {
             identity.currentUser = null;
             $window.localStorage.removeItem(constants.CURRENT_USER_LOCAL_STORAGE_KEY);
-            $scope.identity = identity;
+            vm.identity = identity;
 
             toastr.info('Logout successful!');
             $location.path('/');
         };
 
-        $scope.registerUser = function(userToRegister) {
+        vm.registerUser = function(userToRegister) {
             if (userToRegister.userName.length < constants.MIN_USERNAME_LENGTH || userToRegister.userName.length > constants.MAX_USERNAME_LENGTH) {
                 toastr.error(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols long.`);
                 return;
@@ -57,5 +58,5 @@
     }
 
     angular.module('app')
-        .controller('AuthenticationController', ['$scope', '$window', '$http', '$location', 'toastr', 'sha1', 'identity', 'constants', AuthenticationController]);
+        .controller('AuthenticationController', ['$window', '$http', '$location', 'toastr', 'sha1', 'identity', 'constants', AuthenticationController]);
 }());
