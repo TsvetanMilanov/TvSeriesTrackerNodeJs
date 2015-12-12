@@ -1,46 +1,52 @@
-'use strict';
-angular.module('app').controller('AdministrationController', function($scope, $location, $http, toastr, identity, requestHelper) {
-    $scope.identity = identity;
+(function() {
+    'use strict';
 
-    $scope.getAllUsers = function() {
-        var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
+    function AdministrationController($scope, $location, $http, toastr, identity, requestHelper) {
+        $scope.identity = identity;
 
-        if (!identity.isAdmin() && !identity.isModerator()) {
-            toastr.error('You are not authorized to do that!!!');
-            $location.path('/');
-            return;
-        }
+        $scope.getAllUsers = function() {
+            var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
-        $http.get('/api/users', {
-                headers: headers
-            })
-            .then(function(data) {
-                $scope.users = data.data;
-            })
-            .catch(function(err) {
-                toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err)}`);
+            if (!identity.isAdmin() && !identity.isModerator()) {
+                toastr.error('You are not authorized to do that!!!');
                 $location.path('/');
-            });
-    };
+                return;
+            }
 
-    $scope.getBannedUsers = function() {
-        var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
+            $http.get('/api/users', {
+                    headers: headers
+                })
+                .then(function(data) {
+                    $scope.users = data.data;
+                })
+                .catch(function(err) {
+                    toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err.data)}`);
+                    $location.path('/');
+                });
+        };
 
-        if (!identity.isAdmin() && !identity.isModerator()) {
-            toastr.error('You are not authorized to do that!!!');
-            $location.path('/');
-            return;
-        }
+        $scope.getBannedUsers = function() {
+            var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
-        $http.get('/api/users/banned', {
-                headers: headers
-            })
-            .then(function(data) {
-                $scope.users = data.data;
-            })
-            .catch(function(err) {
-                toastr.error(`There was an error while trying to get banned users. ${JSON.stringify(err)}`);
+            if (!identity.isAdmin() && !identity.isModerator()) {
+                toastr.error('You are not authorized to do that!!!');
                 $location.path('/');
-            });
-    };
-});
+                return;
+            }
+
+            $http.get('/api/users/banned', {
+                    headers: headers
+                })
+                .then(function(data) {
+                    $scope.users = data.data;
+                })
+                .catch(function(err) {
+                    toastr.error(`There was an error while trying to get banned users. ${JSON.stringify(err)}`);
+                    $location.path('/');
+                });
+        };
+    }
+
+    angular.module('app')
+        .controller('AdministrationController', ['$scope', '$location', '$http', 'toastr', 'identity', 'requestHelper', AdministrationController]);
+}());
