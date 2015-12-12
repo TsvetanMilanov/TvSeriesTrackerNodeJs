@@ -1,10 +1,11 @@
 (function() {
     'use strict';
 
-    function AdministrationController($scope, $location, $http, toastr, identity, requestHelper) {
-        $scope.identity = identity;
+    function AdministrationController($location, $http, toastr, identity, requestHelper) {
+        var vm = this;
+        vm.identity = identity;
 
-        $scope.getAllUsers = function() {
+        vm.getAllUsers = function() {
             var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
             if (!identity.isAdmin() && !identity.isModerator()) {
@@ -17,7 +18,7 @@
                     headers: headers
                 })
                 .then(function(data) {
-                    $scope.users = data.data;
+                    vm.users = data.data;
                 })
                 .catch(function(err) {
                     toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err.data)}`);
@@ -25,7 +26,7 @@
                 });
         };
 
-        $scope.getBannedUsers = function() {
+        vm.getBannedUsers = function() {
             var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 
             if (!identity.isAdmin() && !identity.isModerator()) {
@@ -38,7 +39,7 @@
                     headers: headers
                 })
                 .then(function(data) {
-                    $scope.users = data.data;
+                    vm.users = data.data;
                 })
                 .catch(function(err) {
                     toastr.error(`There was an error while trying to get banned users. ${JSON.stringify(err)}`);
@@ -48,5 +49,5 @@
     }
 
     angular.module('app')
-        .controller('AdministrationController', ['$scope', '$location', '$http', 'toastr', 'identity', 'requestHelper', AdministrationController]);
+        .controller('AdministrationController', ['$location', '$http', 'toastr', 'identity', 'requestHelper', AdministrationController]);
 }());

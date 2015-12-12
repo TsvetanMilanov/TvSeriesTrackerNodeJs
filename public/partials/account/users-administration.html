@@ -11,8 +11,8 @@
 
         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-2" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav">
-                <li><a href="" ng-click="getAllUsers()">All users</a></li>
-                <li><a href="" ng-click="getBannedUsers()">Banned users</a></li>
+                <li><a href="" ng-click="vm.getAllUsers()">All users</a></li>
+                <li><a href="" ng-click="vm.getBannedUsers()">Banned users</a></li>
             </ul>
         </div>
     </div>
@@ -25,14 +25,14 @@
                 <th>Username</th>
                 <th>Registration Date</th>
                 <th>Is Banned</th>
-                <th ng-show="identity.isAdmin()">Roles</th>
+                <th ng-show="vm.identity.isAdmin()">Roles</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th ng-show="identity.isAdmin()">Token</th>
+                <th ng-show="vm.identity.isAdmin()">Token</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="user in users | orderBy: '-registrationDate'">
+            <tr ng-repeat="user in vm.users | orderBy: '-registrationDate'">
                 <td><a href="#/users/profile/{{user._id}}/edit">{{user._id}}</a></td>
                 <td><a href="#/users/profile/{{user._id}}/edit">{{user.userName}}</a></td>
                 <td>{{user.registrationDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
@@ -42,7 +42,7 @@
                 <td ng-show="identity.isAdmin()">{{user.roles}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
-                <td class="wrap-text" ng-show="identity.isAdmin()">{{user.token}}</td>
+                <td class="wrap-text" ng-show="vm.identity.isAdmin()">{{user.token}}</td>
             </tr>
         </tbody>
     </table>

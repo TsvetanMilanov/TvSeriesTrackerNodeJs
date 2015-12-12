@@ -20,7 +20,6 @@
                 vm.user = userToEdit;
 
                 vm.editUser = function(editedUser) {
-                    console.log(editedUser);
                     editedUser.roles = JSON.parse(editedUser.rolesJson);
 
                     if (editedUser.password) {
