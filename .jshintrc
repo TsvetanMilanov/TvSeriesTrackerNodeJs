@@ -2,6 +2,6 @@
   "undef": true,
   "unused": true,
   "esnext": true,
-  "predef": [ "Promise", "module", "console", "Buffer", "require", "__dirname" ],
+  "predef": [ "Promise", "module", "console", "Buffer", "require", "__dirname", "angular" ],
   "-W097": false
 }

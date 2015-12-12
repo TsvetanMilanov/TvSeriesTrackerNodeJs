@@ -1,6 +1,5 @@
-/*globals app*/
 'use strict';
-app.factory('identity', function($window, constants) {
+angular.module('app').factory('identity', function($window, constants) {
     var user,
         localStorageUser = $window.localStorage.getItem(constants.CURRENT_USER_LOCAL_STORAGE_KEY);
 

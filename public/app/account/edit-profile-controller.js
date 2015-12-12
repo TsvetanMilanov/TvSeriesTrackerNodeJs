@@ -1,7 +1,7 @@
-/*globals app, toastr, sha1*/
+/*globals toastr, sha1*/
 'use strict';
 
-app.controller('EditProfileController', function($scope, $http, $routeParams, $location, identity, requestHelper, constants) {
+angular.module('app').controller('EditProfileController', function($scope, $http, $routeParams, $location, identity, requestHelper, constants) {
     $scope.identity = identity;
     var currentUser = identity.currentUser,
         idOfUserToEdit = $routeParams.id,

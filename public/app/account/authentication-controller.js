@@ -1,6 +1,6 @@
-/*globals app, sha1, toastr*/
+/*globals sha1, toastr*/
 'use strict';
-app.controller('AuthenticationController', function($scope, $window, $http, $location, identity, constants) {
+angular.module('app').controller('AuthenticationController', function($scope, $window, $http, $location, identity, constants) {
     $scope.identity = identity;
 
     $scope.loginUser = function(user) {

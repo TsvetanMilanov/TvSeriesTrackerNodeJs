@@ -1,7 +1,6 @@
-/*globals app*/
 'use strict';
 
-app.factory('routeAuthorizationChecker', function($q, identity, constants) {
+angular.module('app').factory('routeAuthorizationChecker', function($q, identity, constants) {
     return {
         isAuthenticated: function() {
             if (identity.isAuthenticated()) {

@@ -1,7 +1,6 @@
-/*globals app*/
 'use strict';
 
-app.factory('requestHelper', function() {
+angular.module('app').factory('requestHelper', function() {
     return {
         createJsonHeadersObjectWithBearer(token) {
             return {

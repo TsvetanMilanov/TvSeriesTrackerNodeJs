@@ -1,5 +1,10 @@
-/*globals app*/
-'use strict';
+(function() {
+    'use strict';
 
-app.controller('HomeController', function($scope) {
-});
+    function HomeController() {
+        var vm = this;
+    }
+
+    angular.module('app')
+        .controller('HomeController', [HomeController]);
+}());
