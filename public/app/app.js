@@ -36,6 +36,11 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
+                .when('/tvSeries/:id/episodes', {
+                    templateUrl: '/partials/episodes/view-tv-series-episodes',
+                    controller: 'TvSeriesEpisodesController',
+                    controllerAs: CONTROLLER_VM_NAME
+                })
                 .when('/tvSeries/:id', {
                     templateUrl: '/partials/tv-series/view-single-tv-series',
                     controller: 'DetailsTvSeriesController',

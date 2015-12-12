@@ -1,0 +1,34 @@
+<div class="container">
+    <h3>
+        <span>{{vm.tvSeries.title}}</span> episodes:
+        <div class="pull-right">
+            <span>Season: </span>
+            <select ng-model="selectedSeason">
+                <option value="">All</option>
+                <option ng-repeat="season in vm.seasons" value="{{season}}">{{season}}</option>
+            </select>
+        </div>
+    </h3>
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr class="font-size-16">
+                <th>#</th>
+                <th>Title</th>
+                <th>Season</th>
+                <th>Number</th>
+                <th>Air Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="font-size-16" ng-repeat="episode in vm.episodes | filterBySeasonNumber: selectedSeason | orderBy: '-airDate'">
+                <td>{{$index}}</td>
+                <td>{{episode.title}}</td>
+                <td>{{episode.seasonNumber}}</td>
+                <td>{{episode.number}}</td>
+                <td>{{episode.airDate | date: 'dd-MM-yyyy'}}</td>
+                <td>{{episode.description}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
