@@ -32,31 +32,31 @@ app.config(function($routeProvider) {
 
     $routeProvider
         .when('/users/register', {
-            templateUrl: '/partials/register',
+            templateUrl: '/partials/account/register',
             controller: 'AuthenticationController',
             resolve: routeAuthoChecker.isNotAuthenticated
         })
         .when('/users/profile/:id/edit', {
-            templateUrl: '/partials/edit-profile',
+            templateUrl: '/partials/account/edit-profile',
             controller: 'EditProfileController',
             resolve: routeAuthoChecker.isAuthenticated
         })
         .when('/users/profile/:id', {
-            templateUrl: '/partials/profile',
+            templateUrl: '/partials/account/profile',
             controller: 'ProfileController',
             resolve: routeAuthoChecker.isAuthenticated
         })
         .when('/administration', {
-            templateUrl: '/partials/administration',
+            templateUrl: '/partials/account/administration',
             controller: 'AdministrationController',
             resolve: routeAuthoChecker.isModeratorOrAdmin
         })
         .when('/', {
-            templateUrl: '/partials/home',
+            templateUrl: '/partials/home/home',
             controller: 'HomeController'
         })
         .otherwise({
-            templateUrl: '/partials/home',
+            templateUrl: '/partials/home/home',
             controller: 'HomeController'
         });
 });
