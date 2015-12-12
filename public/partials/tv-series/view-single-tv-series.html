@@ -61,7 +61,7 @@
                     <textarea class="form-control" rows="3" disabled ng-model="vm.tvSeries.description"></textarea>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if="vm.lastAiredEpisode">
                 <label class="col-lg-2 control-label">Last Aire Episode</label>
                 <div class="col-lg-10 panel panel-success panel-heading">
                     <a href="#/episodes/{{vm.lastAiredEpisode._id}}" class="white-text" ng-model="vm.tvSeries.runtimeMinutes">{{vm.lastAiredEpisode.title}}</a>

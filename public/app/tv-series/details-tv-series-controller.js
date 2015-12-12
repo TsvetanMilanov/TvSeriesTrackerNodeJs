@@ -16,9 +16,6 @@
                 $http.get(`/api/episodes/${tvSeries.lastAiredEpisodeId}`)
                     .then(function(lastAiredEpisode) {
                         vm.lastAiredEpisode = lastAiredEpisode.data;
-                    })
-                    .catch(function() {
-                        toastr.error('Can\'t load last aired episode.');
                     });
             })
             .catch(function() {
