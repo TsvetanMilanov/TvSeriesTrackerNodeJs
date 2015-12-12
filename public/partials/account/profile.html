@@ -5,7 +5,7 @@
             <div class="form-group">
                 <label for="inputUserName" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputUserName" value="{{currentUser.userName}}" disabled>
+                    <input type="text" class="form-control" id="inputUserName" value="{{vm.currentUser.userName}}" disabled>
                 </div>
             </div>
             <div class="form-group">
@@ -17,41 +17,41 @@
             <div class="form-group">
                 <label for="inputFirstName" class="col-lg-2 control-label">First name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputFirstName" value="{{currentUser.firstName}}" disabled>
+                    <input type="text" class="form-control" id="inputFirstName" value="{{vm.currentUser.firstName}}" disabled>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-lg-2 control-label">Last name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" value="{{currentUser.lastName}}" disabled>
+                    <input type="text" class="form-control" id="inputLastName" value="{{vm.currentUser.lastName}}" disabled>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputRegistrationDate" class="col-lg-2 control-label">Registration date</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRegistrationDate" value="{{currentUser.registrationDate}}" disabled>
+                    <input type="text" class="form-control" id="inputRegistrationDate" value="{{vm.currentUser.registrationDate}}" disabled>
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin()">
+            <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputToken" class="col-lg-2 control-label">Token</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputToken" value="{{currentUser.token}}" disabled>
+                    <input type="text" class="form-control" id="inputToken" value="{{vm.currentUser.token}}" disabled>
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin()">
+            <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputRoles" class="col-lg-2 control-label">Roles</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRoles" value="{{currentUser.roles}}" disabled>
+                    <input type="text" class="form-control" id="inputRoles" value="{{vm.currentUser.roles}}" disabled>
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin() || identity.isModerator()">
+            <div class="form-group" ng-show="vm.identity.isAdmin() || vm.identity.isModerator()">
                 <label for="inputIsBaned" class="col-lg-2 control-label">Banned</label>
                 <div class="col-lg-10">
-                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="currentUser.isBanned" disabled>
+                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="vm.currentUser.isBanned" disabled>
                 </div>
             </div>
             <div class="col-lg-10 col-lg-offset-2">
-                <a href="#/users/profile/{{currentUser._id}}/edit" class="btn btn-info">Edit</a>
+                <a href="#/users/profile/{{vm.currentUser._id}}/edit" class="btn btn-info">Edit</a>
             </div>
 </div>
 </fieldset>
