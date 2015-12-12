@@ -1,6 +1,7 @@
 'use strict';
 let randomGenerator = require('./../../common/random-generator'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    constants = require('./../../common/constants');
 
 module.exports = {
     importEpisodes: function() {
@@ -38,8 +39,8 @@ module.exports = {
                                 let currentUser = users[j % (users.length - 1)],
                                     currentTvSeries = tvSeries[j];
 
-                                for (let k = 0; k < 5; k++) {
-                                    for (let l = 0; l < 20; l++) {
+                                for (let k = 0; k < constants.SEASONS_PER_TV_SERIES_COUNT_FOR_SAMPLE_DATA; k++) {
+                                    for (let l = 0; l < constants.EPISODES_PER_TV_SERIES_COUNT_FOR_SAMPLE_DATA; l++) {
                                         let episode = {
                                             title: `Episode title s${k}e${l}`,
                                             seasonNumber: k,
