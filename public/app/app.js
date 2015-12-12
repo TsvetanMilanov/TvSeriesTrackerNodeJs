@@ -1,6 +1,10 @@
+/*globals toastr, moment, sha1*/
 (function() {
     'use strict';
     angular.module('app', ['ngRoute'])
+        .constant('toastr', toastr)
+        .constant('moment', moment)
+        .constant('sha1', sha1)
         .config(function($routeProvider) {
             var routeAuthoChecker = {
                     isAdmin: {

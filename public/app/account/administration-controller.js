@@ -1,6 +1,5 @@
-/*globals toastr*/
 'use strict';
-angular.module('app').controller('AdministrationController', function($scope, $location, $http, identity, requestHelper) {
+angular.module('app').controller('AdministrationController', function($scope, $location, $http, toastr, identity, requestHelper) {
     $scope.identity = identity;
 
     $scope.getAllUsers = function() {

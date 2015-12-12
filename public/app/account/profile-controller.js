@@ -1,7 +1,6 @@
-/*globals toastr, moment */
 'use strict';
 
-angular.module('app').controller('ProfileController', function($scope, $routeParams, $http, $location, identity, constants, requestHelper) {
+angular.module('app').controller('ProfileController', function($scope, $routeParams, $http, $location, toastr, moment, identity, constants, requestHelper) {
     var userId = $routeParams.id;
     $scope.identity = identity;
 
