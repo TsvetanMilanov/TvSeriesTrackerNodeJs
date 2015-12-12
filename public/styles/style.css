@@ -3,3 +3,6 @@
     overflow: auto;
     white-space: nowrap;
 }
+.list-tv-series-table-row {
+    font-size: 16px;
+}
