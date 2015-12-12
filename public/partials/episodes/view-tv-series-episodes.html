@@ -23,7 +23,7 @@
         <tbody>
             <tr class="font-size-16" ng-repeat="episode in vm.episodes | filterBySeasonNumber: selectedSeason | orderBy: '-airDate'">
                 <td>{{$index}}</td>
-                <td>{{episode.title}}</td>
+                <td><a href="#/episodes/{{episode._id}}">{{episode.title}}</a></td>
                 <td>{{episode.seasonNumber}}</td>
                 <td>{{episode.number}}</td>
                 <td>{{episode.airDate | date: 'dd-MM-yyyy'}}</td>
