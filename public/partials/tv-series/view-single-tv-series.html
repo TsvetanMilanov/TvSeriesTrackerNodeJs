@@ -1,0 +1,78 @@
+<div class="container col-md-10">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="">TV Series Details</a>
+                                </div>
+
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+                                    <ul class="nav navbar-nav">
+                                        <li class="margin-left-1"><a href="#/tvSeries/{{vm.tvSeries._id}}/episodes" class="btn btn-info" ng-if="vm.identity.isAuthenticated()">All Episodes</a></li>
+                                        <li class="margin-left-1"><a href="" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Add Episode</a></li>
+                                        <li class="margin-left-1"><a href="" class="btn btn-warning" ng-if="vm.identity.isAuthenticated()">Report</a></li>
+                                        <li class="margin-left-1"><a href="" class="btn btn-primary" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Edit</a></li>
+                                        <li class="margin-left-1"><a href="" class="btn btn-danger" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                        <!-- <span>TV Series Details</span>
+                        <a href="" class="btn btn-info" ng-if="vm.identity.isAuthenticated()">All Seasons</a>
+                        <a href="" class="btn btn-info" ng-if="vm.identity.isAuthenticated()">All Episodes</a>
+                        <a href="" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Add Episode</a>
+                        <a href="" class="btn btn-warning" ng-if="vm.identity.isAuthenticated()">Report</a>
+                        <a href="" class="btn btn-primary" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Edit</a>
+                        <a href="" class="btn btn-danger" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Delete</a> -->
+                    </div>
+                </div>
+            </legend>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Title</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" disabled ng-model="vm.tvSeries.title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Rating</label>
+                <div class="col-lg-10">
+                    <input type="number" class="form-control" disabled ng-model="vm.tvSeries.rating">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Release Date</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" disabled ng-model="vm.tvSeries.displayDate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Runtime (min)</label>
+                <div class="col-lg-10">
+                    <input type="number" class="form-control" disabled ng-model="vm.tvSeries.runtimeMinutes">
+                </div>
+            </div>
+            <div class="form-group" ng-if="vm.tvSeries.description">
+                <label class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" disabled ng-model="vm.tvSeries.description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Last Aire Episode</label>
+                <div class="col-lg-10 panel panel-success panel-heading">
+                    <a href="#/episodes/{{vm.lastAiredEpisode._id}}" class="white-text" ng-model="vm.tvSeries.runtimeMinutes">{{vm.lastAiredEpisode.title}}</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

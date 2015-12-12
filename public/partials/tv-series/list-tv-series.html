@@ -14,7 +14,7 @@
             <tr class="list-tv-series-table-row" ng-repeat="tvSeries in vm.allTvSeries | orderBy: '-releaseDate'">
                 <td>{{$index + 1}}</td>
                 <td>
-                    <a href="tvSeries/{{tvSeries._id}}">{{tvSeries.title}}</a>
+                    <a href="#/tvSeries/{{tvSeries._id}}">{{tvSeries.title}}</a>
                 </td>
                 <td>{{tvSeries.rating}}</td>
                 <td>{{tvSeries.releaseDate | date: dd-MM-yyyy}}</td>

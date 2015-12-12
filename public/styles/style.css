@@ -6,3 +6,12 @@
 .list-tv-series-table-row {
     font-size: 16px;
 }
+.white-text {
+    color: white;
+}
+.underline-text {
+    text-decoration: underline;
+}
+.margin-left-1{
+    margin-left: 1px;
+}
