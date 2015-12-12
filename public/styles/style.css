@@ -12,6 +12,9 @@
 .underline-text {
     text-decoration: underline;
 }
-.margin-left-1{
+.margin-left-1 {
     margin-left: 1px;
+}
+.border {
+    border: 1px solid lime;
 }
