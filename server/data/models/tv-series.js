@@ -7,6 +7,7 @@ module.exports = function() {
     let schema = new Schema({
         title: {
             type: String,
+            min: constants.MIN_TITLE_LENGTH,
             required: true
         },
         rating: {

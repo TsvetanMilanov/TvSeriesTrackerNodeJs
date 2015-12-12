@@ -22,7 +22,7 @@
                     });
             })
             .catch(function() {
-                toastr.err('Can\'t find information for this TV Series.');
+                toastr.error('Can\'t find information for this TV Series.');
             });
     }
     angular.module('app')

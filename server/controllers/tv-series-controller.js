@@ -1,6 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
-    TvSeries = mongoose.connection.model('TvSeries');
+    TvSeries = mongoose.connection.model('TvSeries'),
+    modelValidator = require('./../common/model-validator');
 
 module.exports = {
     getAll: function(req, res) {
@@ -32,6 +33,35 @@ module.exports = {
             }
 
             res.json(tvSeries);
+        });
+    },
+    createTvSeries: function(req, res) {
+        let tvSeriesRequestModel = req.body;
+
+        if (!modelValidator.isTvSeriesRequestModelValid(tvSeriesRequestModel)) {
+            res.status(401)
+                .json({
+                    message: 'The TV Series was not valid!'
+                });
+
+            return;
+        }
+
+        tvSeriesRequestModel.authorId = req.user._id;
+
+        TvSeries.create(tvSeriesRequestModel, function(err, savedTvSeries) {
+            if (err) {
+                console.log(err);
+                res.status(401)
+                    .json({
+                        message: 'The TV Series was not valid!'
+                    });
+
+                return;
+            }
+
+            res.status(201)
+                .json(savedTvSeries);
         });
     }
 };

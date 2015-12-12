@@ -6,7 +6,7 @@
         .constant('moment', moment)
         .constant('sha1', sha1)
         .config(function($routeProvider) {
-            var routeAuthoChecker = {
+            var routeAuthChecker = {
                     isAdmin: {
                         authenticate: function(routeAuthorizationChecker, constants) {
                             return routeAuthorizationChecker.isAuthorizedForRole(constants.ADMIN_ROLE);
@@ -46,6 +46,11 @@
                     controller: 'TvSeriesEpisodesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
+                .when('/tvSeries/add', {
+                    templateUrl: '/partials/tv-series/add-tv-series',
+                    controller: 'AddTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME
+                })
                 .when('/tvSeries/:id', {
                     templateUrl: '/partials/tv-series/view-single-tv-series',
                     controller: 'DetailsTvSeriesController',
@@ -60,25 +65,25 @@
                     templateUrl: '/partials/account/register',
                     controller: 'AuthenticationController',
                     controllerAs: CONTROLLER_VM_NAME,
-                    resolve: routeAuthoChecker.isNotAuthenticated
+                    resolve: routeAuthChecker.isNotAuthenticated
                 })
                 .when('/users/profile/:id/edit', {
                     templateUrl: '/partials/account/edit-profile',
                     controller: 'EditProfileController',
                     controllerAs: CONTROLLER_VM_NAME,
-                    resolve: routeAuthoChecker.isAuthenticated
+                    resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/users/profile/:id', {
                     templateUrl: '/partials/account/profile',
                     controller: 'ProfileController',
                     controllerAs: CONTROLLER_VM_NAME,
-                    resolve: routeAuthoChecker.isAuthenticated
+                    resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/administration', {
                     templateUrl: '/partials/account/administration',
                     controller: 'AdministrationController',
                     controllerAs: CONTROLLER_VM_NAME,
-                    resolve: routeAuthoChecker.isModeratorOrAdmin
+                    resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/', {
                     templateUrl: '/partials/home/home',

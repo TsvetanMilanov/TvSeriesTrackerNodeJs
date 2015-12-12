@@ -17,5 +17,24 @@ module.exports = {
         }
 
         return true;
+    },
+    isTvSeriesRequestModelValid: function(model) {
+        if (!model.title) {
+            return false;
+        }
+
+        if (model.title.length < constants.MIN_TITLE_LENGTH) {
+            return false;
+        }
+
+        if (model.rating && model.rating < 0) {
+            return false;
+        }
+
+        if (model.runtimeMinutes && model.runtimeMinutes < 0) {
+            return false;
+        }
+
+        return true;
     }
 };

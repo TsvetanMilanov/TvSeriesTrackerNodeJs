@@ -1,0 +1,43 @@
+<div class="container col-md-10">
+    <form class="form-horizontal" name="addTvSeriesForm">
+        <fieldset>
+            <legend>
+                Add TV Series
+            </legend>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Title</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-minlength="1" ng-model="tvSeries.title" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Rating</label>
+                <div class="col-lg-10">
+                    <input type="number" min="0" class="form-control" ng-model="tvSeries.rating">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Release Date</label>
+                <div class="col-lg-10">
+                    <input type="date" class="form-control" ng-model="tvSeries.releaseDate" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Runtime (min)</label>
+                <div class="col-lg-10">
+                    <input type="number" min="0" class="form-control" ng-model="tvSeries.runtimeMinutes">
+                </div>
+            </div>
+            <div class="form-group" ng-if="vm.tvSeries.description">
+                <label class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" ng-model="tvSeries.description"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Clear</button>
+                <button class="btn btn-success" ng-click="vm.addTvSeries(tvSeries)" ng-disabled="addTvSeriesForm.$invalid">Save</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
