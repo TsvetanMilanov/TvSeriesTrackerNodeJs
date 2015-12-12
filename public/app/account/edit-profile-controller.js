@@ -1,63 +1,71 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('app').controller('EditProfileController', function($scope, $http, $routeParams, $location, toastr, sha1, identity, requestHelper, constants) {
-    $scope.identity = identity;
-    var currentUser = identity.currentUser,
-        idOfUserToEdit = $routeParams.id,
-        headers = requestHelper.createJsonHeadersObjectWithBearer(currentUser.token);
+    function EditProfileController($http, $routeParams, $location, toastr, sha1, identity, requestHelper, constants) {
+        var vm = this;
+        vm.identity = identity;
 
-    $http.get(`/api/users/${idOfUserToEdit}`, {
-            headers: headers
-        })
-        .then(function(data) {
-            var userToEdit = data.data;
-            userToEdit.rolesJson = JSON.stringify(userToEdit.roles);
-            userToEdit.password = undefined;
+        var currentUser = identity.currentUser,
+            idOfUserToEdit = $routeParams.id,
+            headers = requestHelper.createJsonHeadersObjectWithBearer(currentUser.token);
 
-            $scope.user = userToEdit;
+        $http.get(`/api/users/${idOfUserToEdit}`, {
+                headers: headers
+            })
+            .then(function(data) {
+                var userToEdit = data.data;
+                userToEdit.rolesJson = JSON.stringify(userToEdit.roles);
+                userToEdit.password = undefined;
 
-            $scope.editUser = function(editedUser) {
-                editedUser.roles = JSON.parse(editedUser.rolesJson);
+                vm.user = userToEdit;
 
-                if (editedUser.password) {
-                    if (editedUser.password.length < constants.MIN_PASSWORD_LENGTH) {
-                        toastr.info(`Password should be at least ${constants.MIN_PASSWORD_LENGTH} symbols.`);
+                vm.editUser = function(editedUser) {
+                    console.log(editedUser);
+                    editedUser.roles = JSON.parse(editedUser.rolesJson);
+
+                    if (editedUser.password) {
+                        if (editedUser.password.length < constants.MIN_PASSWORD_LENGTH) {
+                            toastr.info(`Password should be at least ${constants.MIN_PASSWORD_LENGTH} symbols.`);
+                            return;
+                        }
+
+                        editedUser.password = sha1(editedUser.password);
+                    }
+
+                    if (editedUser.userName.length < constants.MIN_USERNAME_LENGTH ||
+                        editedUser.userName.length > constants.MAX_USERNAME_LENGTH) {
+                        toastr.info(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols.`);
                         return;
                     }
 
-                    editedUser.password = sha1(editedUser.password);
-                }
+                    editedUser.registrationDate = new Date(editedUser.registrationDate);
 
-                if (editedUser.userName.length < constants.MIN_USERNAME_LENGTH ||
-                    editedUser.userName.length > constants.MAX_USERNAME_LENGTH) {
-                    toastr.info(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols.`);
-                    return;
-                }
+                    $http.put(`/api/users/${editedUser._id}`, editedUser, {
+                            headers: headers
+                        })
+                        .then(function(data) {
+                            var responseUser = data.data;
+                            if (identity.currentUser.token == responseUser.token) {
+                                identity.currentUser = responseUser;
+                            }
 
-                editedUser.registrationDate = new Date(editedUser.registrationDate);
+                            vm.identity = identity;
 
-                $http.put(`/api/users/${editedUser._id}`, editedUser, {
-                        headers: headers
-                    })
-                    .then(function(data) {
-                        var responseUser = data.data;
-                        if (identity.currentUser.token == responseUser.token) {
-                            identity.currentUser = responseUser;
-                        }
+                            toastr.success(`User ${responseUser.userName} edited successfully!`);
+                            $location.path(`/users/profile/${responseUser._id}`);
+                        })
+                        .catch(function(err) {
+                            toastr.error(`Something went wrong: ${err.message}`);
+                            $location.path('/');
+                        });
+                };
+            })
+            .catch(function() {
+                toastr.error('There was an error, try again later.');
+                $location.path('/');
+            });
+    }
 
-                        $scope.identity = identity;
-
-                        toastr.success(`User ${responseUser.userName} edited successfully!`);
-                        $location.path(`/users/profile/${responseUser._id}`);
-                    })
-                    .catch(function(err) {
-                        toastr.error(`Something went wrong: ${err.message}`);
-                        $location.path('/');
-                    });
-            };
-        })
-        .catch(function() {
-            toastr.error('There was an error, try again later.');
-            $location.path('/');
-        });
-});
+    angular.module('app')
+        .controller('EditProfileController', ['$http', '$routeParams', '$location', 'toastr', 'sha1', 'identity', 'requestHelper', 'constants', EditProfileController]);
+}());

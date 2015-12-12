@@ -2,56 +2,56 @@
     <form class="form-horizontal" name="registerForm">
         <fieldset>
             <legend>Edit profile</legend>
-            <div class="form-group" ng-show="identity.isAdmin() || identity.isModerator()">
+            <div class="form-group" ng-show="vm.identity.isAdmin() || vm.identity.isModerator()">
                 <label for="inputUserName" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputUserName" ng-model="user.userName">
+                    <input type="text" class="form-control" id="inputUserName" ng-model="vm.user.userName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="inputPassword" ng-model="user.password">
+                    <input type="password" class="form-control" id="inputPassword" ng-model="vm.user.password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputFirstName" class="col-lg-2 control-label">First name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputFirstName" ng-model="user.firstName">
+                    <input type="text" class="form-control" id="inputFirstName" ng-model="vm.user.firstName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-lg-2 control-label">Last name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" ng-model="user.lastName">
+                    <input type="text" class="form-control" id="inputLastName" ng-model="vm.user.lastName">
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin() || identity.isModerator()">
+            <div class="form-group" ng-show="vm.identity.isAdmin() || vm.identity.isModerator()">
                 <label for="inputRegistrationDate" class="col-lg-2 control-label">Registration date</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRegistrationDate"  ng-model="user.registrationDate">
+                    <input type="text" class="form-control" id="inputRegistrationDate"  ng-model="vm.user.registrationDate">
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin()">
+            <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputToken" class="col-lg-2 control-label">Token</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputToken" ng-model="user.token">
+                    <input type="text" class="form-control" id="inputToken" ng-model="vm.user.token">
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin()">
+            <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputRoles" class="col-lg-2 control-label">Roles</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRoles" ng-model="user.rolesJson">
+                    <input type="text" class="form-control" id="inputRoles" ng-model="vm.user.rolesJson">
                 </div>
             </div>
-            <div class="form-group" ng-show="identity.isAdmin() || identity.isModerator()">
+            <div class="form-group" ng-show="vm.identity.isAdmin() || vm.identity.isModerator()">
                 <label for="inputIsBaned" class="col-lg-2 control-label">Banned</label>
                 <div class="col-lg-10">
-                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="currentUser.isBanned"  ng-model="user.isBanned">
+                    <input type="checkbox" class="form-control" id="inputIsBaned" ng-checked="vm.currentUser.isBanned"  ng-model="vm.user.isBanned">
                 </div>
             </div>
             <div class="col-lg-10 col-lg-offset-2">
-                <button class="btn btn-success" ng-click="editUser(user)">Save</button>
+                <button class="btn btn-success" ng-click="vm.editUser(vm.user)">Save</button>
             </div>
 </div>
 </fieldset>
