@@ -1,7 +1,8 @@
 'use strict';
 let usersImporter = require('./users-importer'),
     episodesImporter = require('./episodes-importer'),
-    tvSeriesImporter = require('./tv-series-importer');
+    tvSeriesImporter = require('./tv-series-importer'),
+    usersTvSeriesImporter = require('./users-tv-series-importer');
 
 module.exports = {
     seedInitialData: function(shouldSeedData) {
@@ -15,6 +16,9 @@ module.exports = {
             })
             .then(function() {
                 return episodesImporter.importEpisodes();
+            })
+            .then(function() {
+                return usersTvSeriesImporter.importUsersTvSeries();
             })
             .catch(function(err) {
                 console.log(err);

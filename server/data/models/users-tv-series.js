@@ -5,17 +5,17 @@ let mongoose = require('mongoose'),
 module.exports = function() {
     let schema = new Schema({
         userId: {
-            type: Schema.types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
         },
         tvSeriesId: {
-            type: Schema.types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'TvSeries',
             required: true
         },
         lastWatchedEpisodeId: {
-            type: Schema.types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'Episode',
             required: true
         }
