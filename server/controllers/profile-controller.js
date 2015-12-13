@@ -114,7 +114,7 @@ module.exports = {
 
                             result.forEach(function(lastWatchedEpisode) {
                                 if (lastWatchedEpisode.tvSeriesId.toString() == episode.tvSeriesId.toString()) {
-                                    currentLastWatchedEpisode = lastWatchedEpisode;
+                                    currentLastWatchedEpisode = lastWatchedEpisode.lastWatchedEpisodeId;
                                 }
                             });
 
@@ -147,7 +147,6 @@ module.exports = {
             });
     },
     subscribeForTvSeries: function(req, res) {
-        console.log('here');
         let tvSeriesId = req.body.tvSeriesId,
             userId = req.user._id;
 
