@@ -11,10 +11,17 @@
         .then(function(response) {
             response = response.data;
 
-            console.log(response);
-
             vm.allTvSeries = response.allTvSeries;
             vm.lastWatchedEpisodes = response.lastWatchedEpisodes;
+
+            $http.get('/api/profile/myLastAiredEpisodes', config)
+            .then(function(response) {
+                vm.lastAiredEpisodes = response.data;
+            })
+            .catch(function(err) {
+                console.log(err);
+                toastr.error('Can\'t load the last aired episodes for your TV Series.');
+            });
         })
         .catch(function(err) {
             console.log(err);

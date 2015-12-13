@@ -15,6 +15,7 @@
                 <th>№</th>
                 <th>Title</th>
                 <th>Last Watched Episode</th>
+                <th>Last Aired Episode</th>
             </tr>
         </thead>
         <tbody>
@@ -26,9 +27,9 @@
                 <td ng-repeat="episode in vm.lastWatchedEpisodes | filter: {tvSeriesId: tvSeries._id}">
                     <a href="#/episodes/{{episode._id}}">{{episode.title}}</a>
                 </td>
-                <!-- <td>
-                    {{(vm.lastWatchedEpisodes | filter: {tvSeriesId: tvSeries._id})[0].title}}
-                </td> -->
+                <td ng-repeat="episode in vm.lastAiredEpisodes | filter: {tvSeriesId: tvSeries._id}">
+                    <a href="#/episodes/{{episode._id}}">{{episode.title}}</a>
+                </td>
             </tr>
         </tbody>
     </table>
