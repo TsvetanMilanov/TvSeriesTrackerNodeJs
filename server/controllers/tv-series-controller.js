@@ -1,7 +1,10 @@
 'use strict';
 let mongoose = require('mongoose'),
+    Episode = mongoose.connection.model('Episode'),
     TvSeries = mongoose.connection.model('TvSeries'),
-    modelValidator = require('./../common/model-validator');
+    modelValidator = require('./../common/model-validator'),
+    identity = require('./../common/identity'),
+    constants = require('./../common/constants');
 
 module.exports = {
     getAll: function(req, res) {
@@ -109,6 +112,47 @@ module.exports = {
 
                 res.json(data);
             });
+        });
+    },
+    deleteTvSeries: function(req, res) {
+        let id = req.params.id;
+
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(req.user, constants.MODERATOR_ROLE)) {
+            res.status(401)
+                .json({
+                    message: 'You are not authorized to delete TV Series.'
+                });
+
+            return;
+        }
+
+        Episode.remove({
+            tvSeriesId: id
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400)
+                    .json({
+                        message: 'The information of the TV Series is invalid'
+                    });
+                return;
+            }
+        });
+
+        TvSeries.remove({
+            _id: id
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400)
+                    .json({
+                        message: 'The information of the TV Series is invalid'
+                    });
+                return;
+            }
+
+            res.sendStatus(200);
         });
     }
 };

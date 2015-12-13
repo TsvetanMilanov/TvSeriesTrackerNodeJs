@@ -8,9 +8,10 @@ module.exports = function(app) {
 
     router
         .get('/:id', tvSeriesController.getById)
+        .put('/:id', identity.requiresAuthentication(), tvSeriesController.editTvSeries)
+        .delete('/:id', identity.requiresAuthentication(), tvSeriesController.deleteTvSeries)
         .get('/', tvSeriesController.getAll)
-        .post('/', identity.requiresAuthentication(), tvSeriesController.createTvSeries)
-        .put('/:id', identity.requiresAuthentication(), tvSeriesController.editTvSeries);
+        .post('/', identity.requiresAuthentication(), tvSeriesController.createTvSeries);
 
     app.use('/api/tvSeries', router);
 };

@@ -59,6 +59,12 @@
                     controller: 'EpisodeDetailsController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
+                .when('/tvSeries/:id/delete', {
+                    template: '',
+                    controller: 'DeleteTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/tvSeries/:id/episodes', {
                     templateUrl: '/partials/episodes/view-tv-series-episodes',
                     controller: 'TvSeriesEpisodesController',
