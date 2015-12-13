@@ -31,6 +31,12 @@
                     </div>
                 </div>
             </legend>
+            <div class="form-group" ng-if="vm.tvSeries.lastAiredEpisode">
+                <label class="col-lg-2 control-label">Last Aire Episode</label>
+                <div class="col-lg-10 panel panel-success panel-heading">
+                    <a href="#/episodes/{{vm.tvSeries.lastAiredEpisode._id}}" class="white-text" ng-model="vm.tvSeries.runtimeMinutes">{{vm.tvSeries.lastAiredEpisode.title}}</a>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Title</label>
                 <div class="col-lg-10">
@@ -59,12 +65,6 @@
                 <label class="col-lg-2 control-label">Description</label>
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="3" disabled ng-model="vm.tvSeries.description"></textarea>
-                </div>
-            </div>
-            <div class="form-group" ng-if="vm.lastAiredEpisode">
-                <label class="col-lg-2 control-label">Last Aire Episode</label>
-                <div class="col-lg-10 panel panel-success panel-heading">
-                    <a href="#/episodes/{{vm.lastAiredEpisode._id}}" class="white-text" ng-model="vm.tvSeries.runtimeMinutes">{{vm.lastAiredEpisode.title}}</a>
                 </div>
             </div>
         </fieldset>

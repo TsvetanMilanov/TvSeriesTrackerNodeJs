@@ -15,8 +15,8 @@
                 vm.episode = episode;
 
                 $http.get(`/api/tvSeries/${episode.tvSeriesId}`)
-                    .then(function(tvSeries) {
-                        tvSeries = tvSeries.data;
+                    .then(function(result) {
+                        let tvSeries = result.data.tvSeries;
 
                         vm.tvSeries = tvSeries;
                     })

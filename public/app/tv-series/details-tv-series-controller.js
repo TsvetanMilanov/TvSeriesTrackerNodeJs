@@ -8,18 +8,15 @@
         vm.identity = identity;
 
         $http.get(`/api/tvSeries/${id}`)
-            .then(function(tvSeries) {
-                tvSeries = tvSeries.data;
+            .then(function(result) {
+                result = result.data;
+                let tvSeries = result.tvSeries;
+
                 tvSeries.releaseDate = new Date(tvSeries.releaseDate);
 
+                tvSeries.lastAiredEpisode = result.lastAiredEpisode;
+                
                 vm.tvSeries = tvSeries;
-
-                if (tvSeries.lastAiredEpisodeId) {
-                    $http.get(`/api/episodes/${tvSeries.lastAiredEpisodeId}`)
-                        .then(function(lastAiredEpisode) {
-                            vm.lastAiredEpisode = lastAiredEpisode.data;
-                        });
-                }
             })
             .catch(function() {
                 toastr.error('Can\'t find information for this TV Series.');

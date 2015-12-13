@@ -8,8 +8,8 @@
         vm.identity = identity;
 
         $http.get(`/api/tvSeries/${id}`)
-            .then(function(tvSeries) {
-                vm.tvSeries = tvSeries.data;
+            .then(function(result) {
+                vm.tvSeries = result.data.tvSeries;
             })
             .catch(function() {
                 toastr.error('Can\'t find TV Series.');

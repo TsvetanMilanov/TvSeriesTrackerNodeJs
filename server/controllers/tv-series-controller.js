@@ -4,7 +4,8 @@ let mongoose = require('mongoose'),
     TvSeries = mongoose.connection.model('TvSeries'),
     modelValidator = require('./../common/model-validator'),
     identity = require('./../common/identity'),
-    constants = require('./../common/constants');
+    constants = require('./../common/constants'),
+    tvSeriesHelper = require('./../common/tv-series-helper.js');
 
 module.exports = {
     getAll: function(req, res) {
@@ -35,7 +36,21 @@ module.exports = {
                 return;
             }
 
-            res.json(tvSeries);
+            tvSeriesHelper.getLastAiredEpisodeForTvSeries(id)
+                .then(function(episode) {
+                    res.json({
+                        tvSeries,
+                        lastAiredEpisode: episode
+                    });
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    res.status(400)
+                        .json({
+                            message: 'Can\'t find last aired episode for this TV Series.'
+                        });
+                });
+
         });
     },
     createTvSeries: function(req, res) {
