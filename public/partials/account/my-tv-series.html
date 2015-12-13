@@ -24,10 +24,10 @@
                 <td>
                     <a href="#/tvSeries/{{tvSeries._id}}">{{tvSeries.title}}</a>
                 </td>
-                <td ng-repeat="episode in vm.lastWatchedEpisodes | filter: {tvSeriesId: tvSeries._id}">
+                <td ng-repeat="episode in vm.lastWatchedEpisodes | filter: {tvSeriesId: tvSeries._id} |  limitTo: 1 : 0">
                     <a href="#/episodes/{{episode._id}}">{{episode.title}}</a>
                 </td>
-                <td ng-repeat="episode in vm.lastAiredEpisodes | filter: {tvSeriesId: tvSeries._id}">
+                <td ng-repeat="episode in vm.lastAiredEpisodes | filter: {tvSeriesId: tvSeries._id} |  limitTo: 1 : 0">
                     <a href="#/episodes/{{episode._id}}">{{episode.title}}</a>
                 </td>
             </tr>
