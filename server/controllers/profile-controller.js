@@ -3,8 +3,6 @@ let mongoose = require('mongoose'),
     TvSeries = mongoose.connection.model('TvSeries'),
     Episode = mongoose.connection.model('Episode'),
     UsersTvSeries = mongoose.connection.model('UsersTvSeries'),
-    identity = require('./../common/identity'),
-    constants = require('./../common/constants'),
     tvSeriesHelper = require('./../common/tv-series-helper.js');
 
 module.exports = {
@@ -89,5 +87,63 @@ module.exports = {
                         });
                 });
         });
+    },
+    getMyTvSeriesWithNewEpisodes: function(req, res) {
+        UsersTvSeries.find({
+                userId: req.user._id
+            })
+            .populate('lastWatchedEpisodeId')
+            .select({
+                lastWatchedEpisodeId: 1,
+                tvSeriesId: 1
+            })
+            .exec(function(err, result) {
+                if (err) {
+                    console.log(err);
+                    res.status(400)
+                        .json('Can\'t load the information of your TV Series.');
+                    return;
+                }
+
+                let resultTvSeriesIds = [];
+
+                tvSeriesHelper.findLastAiredEpisodesForMultipleTvSeries(result.map(r => r.tvSeriesId))
+                    .then(function(lastAiredEpisodes) {
+                        lastAiredEpisodes.forEach(function(episode) {
+                            let currentLastWatchedEpisode = {};
+
+                            result.forEach(function(lastWatchedEpisode) {
+                                if (lastWatchedEpisode.tvSeriesId.toString() == episode.tvSeriesId.toString()) {
+                                    currentLastWatchedEpisode = lastWatchedEpisode;
+                                }
+                            });
+
+                            if (currentLastWatchedEpisode._id.toString() != episode._id.toString()) {
+                                resultTvSeriesIds.push(episode.tvSeriesId);
+                            }
+                        });
+
+                        TvSeries.find({
+                            _id: {
+                                $in: resultTvSeriesIds
+                            }
+                        }, function(err, data) {
+                            if (err) {
+                                console.log(err);
+                                res.status(400)
+                                    .json('Can\'t load the information of your TV Series.');
+                                return;
+                            }
+
+                            res.json(data);
+                        });
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                        res.status(400)
+                            .json('Can\'t load the information of your TV Series.');
+                        return;
+                    });
+            });
     }
 };
