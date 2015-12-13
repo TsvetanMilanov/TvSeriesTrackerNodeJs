@@ -21,10 +21,6 @@ module.exports = function() {
             type: Number,
             min: 0
         },
-        lastAiredEpisodeId: {
-            type: Schema.Types.ObjectId,
-            ref: 'Episode'
-        },
         authorId: {
             type: Schema.Types.ObjectId,
             required: true
