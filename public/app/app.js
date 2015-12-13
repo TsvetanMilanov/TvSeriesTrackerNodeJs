@@ -99,7 +99,7 @@
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/administration', {
-                    templateUrl: '/partials/account/administration',
+                    templateUrl: '/partials/administration/administration',
                     controller: 'AdministrationController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
