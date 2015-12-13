@@ -28,8 +28,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="#/">Home</a></li>
+                        <li ng-if="vm.identity.isAuthenticated()"><a href="#/myTvSeries">My TV Series</a></li>
                         <li><a href="#/tvSeries">All TV Series</a></li>
-                        <li><a href="#/tvSeries/add">Add New TV Series</a></li>
+                        <li ng-if="vm.identity.isAuthenticated()"><a href="#/tvSeries/add">Add New TV Series</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="login">
                         <div ng-hide="vm.identity.isAuthenticated()">
@@ -45,6 +46,7 @@
                                 <li class="dropdown">
                                     <a href="" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">{{vm.identity.currentUser.userName}} <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#/myTvSeries">My TV Series</a></li>
                                         <li><a href="#/users/profile/{{vm.identity.currentUser._id}}">Profile</a></li>
                                         <li ng-show="vm.identity.isAdmin() || vm.identity.isModerator()"><a href="#/administration">Administration</a></li>
                                     </ul>
@@ -83,6 +85,7 @@
     <script src="/app/account/authentication-controller.js"></script>
     <script src="/app/account/profile-controller.js"></script>
     <script src="/app/account/edit-profile-controller.js"></script>
+    <script src="/app/account/my-tv-series-controller.js"></script>
     <script src="/app/administration/administration-controller.js"></script>
     <script src="/app/tv-series/tv-series-controller.js"></script>
     <script src="/app/tv-series/details-tv-series-controller.js"></script>
