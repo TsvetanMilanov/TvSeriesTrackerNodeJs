@@ -29,6 +29,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#/">Home</a></li>
                         <li ng-if="vm.identity.isAuthenticated()"><a href="#/myTvSeries">My TV Series</a></li>
+                        <li ng-if="vm.identity.isAuthenticated()"><a href="#/myTvSeriesWithNewEpisodes">My TV Series With New Episode</a></li>
                         <li><a href="#/tvSeries">All TV Series</a></li>
                         <li ng-if="vm.identity.isAuthenticated()"><a href="#/tvSeries/add">Add New TV Series</a></li>
                     </ul>
@@ -86,6 +87,7 @@
     <script src="/app/account/profile-controller.js"></script>
     <script src="/app/account/edit-profile-controller.js"></script>
     <script src="/app/account/my-tv-series-controller.js"></script>
+    <script src="/app/account/my-tv-series-with-new-episodes-controller.js"></script>
     <script src="/app/administration/administration-controller.js"></script>
     <script src="/app/tv-series/tv-series-controller.js"></script>
     <script src="/app/tv-series/details-tv-series-controller.js"></script>
