@@ -48,6 +48,12 @@
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
+                .when('/episodes/:id/delete', {
+                    template: '',
+                    controller: 'DeleteEpisodeController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/episodes/:id', {
                     templateUrl: '/partials/episodes/episode-details',
                     controller: 'EpisodeDetailsController',

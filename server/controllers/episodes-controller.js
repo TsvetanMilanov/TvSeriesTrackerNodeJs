@@ -166,5 +166,31 @@ module.exports = {
                 res.json(data);
             });
         });
+    },
+    deleteEpisode: function(req, res) {
+        if (!identity.isAuthorizedForRole(req.user, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(req.user, constants.MODERATOR_ROLE)) {
+            res.status(401)
+                .json({
+                    message: 'You are not authorized to delete episodes.'
+                });
+
+            return;
+        }
+
+        Episode.remove({
+            _id: req.params.id
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                res.status(400)
+                    .json({
+                        message: 'The information of the episode is invalid'
+                    });
+                return;
+            }
+
+            res.sendStatus(200);
+        });
     }
 };

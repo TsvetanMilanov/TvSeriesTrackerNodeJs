@@ -9,10 +9,11 @@ module.exports = function(app) {
     router
         .get('/forTvSeries/:id', episodesController.getByTvSeriesId)
         .get('/:id', episodesController.getById)
+        .put('/:id', identity.requiresAuthentication(), episodesController.editEpisode)
+        .delete('/:id', identity.requiresAuthentication(), episodesController.deleteEpisode)
         .get('/:tvSeriesId/:season/:number', episodesController.getByTvSeriesIdSeasonAndNumber)
         .get('/', identity.requiresAuthentication(), episodesController.getAll)
-        .post('/', identity.requiresAuthentication(), episodesController.createEpisode)
-        .put('/:id', identity.requiresAuthentication(), episodesController.editEpisode);
+        .post('/', identity.requiresAuthentication(), episodesController.createEpisode);
 
     app.use('/api/episodes', router);
 };

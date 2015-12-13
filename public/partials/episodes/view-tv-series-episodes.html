@@ -1,6 +1,6 @@
 <div class="container">
     <h3>
-        <span>{{vm.tvSeries.title}}</span> episodes:
+        <span><a href="#/tvSeries/{{vm.tvSeries._id}}">{{vm.tvSeries.title}}</a></span> episodes:
         <div class="pull-right">
             <label for="searchBox" class="font-size-16">Filter By Title</label>
             <input type="text" id="searchBox" placeholder="Title" ng-model="titleFilter">
