@@ -7,9 +7,11 @@
     <link rel="stylesheet" type="text/css" href="lib/toastr/toastr.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="icon" type="image/ico" href="/images/favicon.ico">
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/angular/angular.js"></script>
 </head>
 
-<body ng-app="app">
+<body ng-app="app" ng-cloak>
     <div ng-controller="AuthenticationController as vm">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -67,12 +69,10 @@
         </div>
     </footer>
 
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/lib/toastr/toastr.js"></script>
     <script src="/lib/moment/moment.js"></script>
     <script src="/lib/js-sha1/src/sha1.js"></script>
-    <script src="/lib/angular/angular.js"></script>
     <script src="/lib/angular-route/angular-route.min.js"></script>
     <script src="/app/app.js"></script>
     <script src="/app/utilities/constants.js"></script>
