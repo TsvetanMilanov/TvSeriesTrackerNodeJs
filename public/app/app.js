@@ -36,6 +36,12 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
+                .when('/subscribe/:id', {
+                    template: '',
+                    controller: 'SubscribeForTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
                 .when('/myTvSeriesWithNewEpisodes', {
                     templateUrl: '/partials/tv-series/list-tv-series',
                     controller: 'MyTvSeriesWithNewEpisodesController',

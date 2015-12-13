@@ -18,7 +18,7 @@
 
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
                                     <ul class="nav navbar-nav">
-                                        <li class="margin-left-1"><a href="" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Subscribe</a></li>
+                                        <li class="margin-left-1"><a href="#/subscribe/{{vm.tvSeries._id}}" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Subscribe</a></li>
                                         <li class="margin-left-1"><a href="#/tvSeries/{{vm.tvSeries._id}}/episodes" class="btn btn-info" ng-if="vm.identity.isAuthenticated()">All Episodes</a></li>
                                         <li class="margin-left-1"><a href="#/episodes/{{vm.tvSeries._id}}/add" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Add Episode</a></li>
                                         <li class="margin-left-1"><a href="" class="btn btn-warning" ng-if="vm.identity.isAuthenticated()">Report</a></li>
