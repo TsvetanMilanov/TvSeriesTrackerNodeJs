@@ -2,7 +2,8 @@
 let mongoose = require('mongoose'),
     Episode = mongoose.connection.model('Episode'),
     identity = require('./../common/identity'),
-    constants = require('./../common/constants');
+    constants = require('./../common/constants'),
+    modelValidator = require('./../common/model-validator');
 
 module.exports = {
     getAll: function(req, res) {
@@ -80,6 +81,34 @@ module.exports = {
             }
 
             res.json(episode);
+        });
+    },
+    createEpisode: function(req, res) {
+        let episodeRequestModel = req.body;
+
+        if (!modelValidator.isEpisodeRequestModelValid(episodeRequestModel)) {
+            res.status(401)
+                .json({
+                    message: 'The information of the episode is invalid'
+                });
+
+            return;
+        }
+
+        episodeRequestModel.authorId = req.user._id;
+
+        Episode.create(episodeRequestModel, function(err, data) {
+            if (err) {
+                res.status(401)
+                    .json({
+                        message: 'The information of the episode is invalid'
+                    });
+
+                return;
+            }
+
+            res.status(201)
+                .json(data);
         });
     }
 };

@@ -36,5 +36,20 @@ module.exports = {
         }
 
         return true;
+    },
+    isEpisodeRequestModelValid: function(model) {
+        if (!model.title || !model.seasonNumber || !model.number || !model.tvSeriesId) {
+            return false;
+        }
+
+        if (model.title.length < constants.MIN_TITLE_LENGTH) {
+            return false;
+        }
+
+        if (model.seasonNumber < 0 || model.number < 0) {
+            return false;
+        }
+
+        return true;
     }
 };

@@ -1,0 +1,49 @@
+<div class="container col-md-10">
+    <form name="addEpisodeForm" class="form-horizontal">
+        <fieldset>
+            <legend>
+                Add Episode
+            </legend>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">TV Series</label>
+                <div class="col-lg-10">
+                    <span type="text" class="form-control">{{vm.tvSeries.title}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-title" class="col-lg-2 control-label">Title</label>
+                <div class="col-lg-10">
+                    <input type="text" id="input-title" class="form-control" ng-minlength="1" ng-model="episode.title" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-season-number" class="col-lg-2 control-label">Season</label>
+                <div class="col-lg-10">
+                    <input type="number" id="input-season-number" class="form-control" min="0" ng-model="episode.seasonNumber" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-number" class="col-lg-2 control-label">Number</label>
+                <div class="col-lg-10">
+                    <input type="number" id="input-number" class="form-control" min="0" ng-model="episode.number" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-air-date" class="col-lg-2 control-label">Air Date</label>
+                <div class="col-lg-10">
+                    <input type="date" id="input-air-date" class="form-control" ng-model="episode.airDate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-description" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea id="input-description" class="form-control" rows="3" ng-model="episode.description"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Clear</button>
+                <button class="btn btn-success" ng-click="vm.addEpisode(episode)" ng-disabled="addEpisodeForm.$invalid">Save</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

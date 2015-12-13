@@ -36,6 +36,12 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
+                .when('/episodes/:id/add', {
+                    templateUrl: '/partials/episodes/add-episode',
+                    controller: 'AddEpisodeController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
                 .when('/episodes/:id', {
                     templateUrl: '/partials/episodes/episode-details',
                     controller: 'EpisodeDetailsController',

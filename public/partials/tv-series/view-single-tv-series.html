@@ -20,7 +20,7 @@
                                     <ul class="nav navbar-nav">
                                         <li class="margin-left-1"><a href="" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Subscribe</a></li>
                                         <li class="margin-left-1"><a href="#/tvSeries/{{vm.tvSeries._id}}/episodes" class="btn btn-info" ng-if="vm.identity.isAuthenticated()">All Episodes</a></li>
-                                        <li class="margin-left-1"><a href="" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Add Episode</a></li>
+                                        <li class="margin-left-1"><a href="#/episodes/{{vm.tvSeries._id}}/add" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Add Episode</a></li>
                                         <li class="margin-left-1"><a href="" class="btn btn-warning" ng-if="vm.identity.isAuthenticated()">Report</a></li>
                                         <li class="margin-left-1"><a href="" class="btn btn-primary" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Edit</a></li>
                                         <li class="margin-left-1"><a href="" class="btn btn-danger" ng-if="vm.identity.isAdmin() || vm.identity.isModerator()">Delete</a></li>
