@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function EpisodeDetailsController($http, $routeParams, toastr, moment, identity) {
+    function EpisodeDetailsController($http, $routeParams, toastr, identity) {
         var vm = this,
             id = $routeParams.id;
         vm.identity = identity;
@@ -9,7 +9,9 @@
         $http.get(`/api/episodes/${id}`)
             .then(function(episode) {
                 episode = episode.data;
-                episode.displayDate = moment(episode.airDate).format('DD-MM-YYYY');
+
+                episode.airDate = new Date(episode.airDate);
+
                 vm.episode = episode;
 
                 $http.get(`/api/tvSeries/${episode.tvSeriesId}`)
@@ -28,5 +30,5 @@
     }
 
     angular.module('app')
-        .controller('EpisodeDetailsController', ['$http', '$routeParams', 'toastr', 'moment', 'identity', EpisodeDetailsController]);
+        .controller('EpisodeDetailsController', ['$http', '$routeParams', 'toastr', 'identity', EpisodeDetailsController]);
 }());

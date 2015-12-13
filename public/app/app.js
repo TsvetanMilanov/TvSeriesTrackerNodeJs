@@ -36,6 +36,12 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
+                .when('/episodes/:tvSeriesId/edit/:episodeId', {
+                    templateUrl: '/partials/episodes/edit-episode',
+                    controller: 'EditEpisodeController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/episodes/:id/add', {
                     templateUrl: '/partials/episodes/add-episode',
                     controller: 'AddEpisodeController',
@@ -52,13 +58,20 @@
                     controller: 'TvSeriesEpisodesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
+                .when('/tvSeries/:id/edit', {
+                    templateUrl: '/partials/tv-series/edit-tv-series',
+                    controller: 'EditTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/tvSeries/add', {
                     templateUrl: '/partials/tv-series/add-tv-series',
                     controller: 'AddTvSeriesController',
-                    controllerAs: CONTROLLER_VM_NAME
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/tvSeries/:id', {
-                    templateUrl: '/partials/tv-series/view-single-tv-series',
+                    templateUrl: '/partials/tv-series/details-tv-series',
                     controller: 'DetailsTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })

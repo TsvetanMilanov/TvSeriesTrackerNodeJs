@@ -2,41 +2,41 @@
     <form class="form-horizontal" name="addTvSeriesForm">
         <fieldset>
             <legend>
-                Add TV Series
+                Edit TV Series
             </legend>
             <div class="form-group">
                 <label for="input-title" class="col-lg-2 control-label">Title</label>
                 <div class="col-lg-10">
-                    <input type="text" id="input-title" class="form-control" ng-minlength="1" ng-model="tvSeries.title" required>
+                    <input type="text" id="input-title" class="form-control" ng-minlength="1" ng-model="vm.tvSeries.title" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="input-rating" class="col-lg-2 control-label">Rating</label>
                 <div class="col-lg-10">
-                    <input type="number" id="input-rating" min="0" class="form-control" ng-model="tvSeries.rating">
+                    <input type="number" id="input-rating" min="0" class="form-control" ng-model="vm.tvSeries.rating">
                 </div>
             </div>
             <div class="form-group">
                 <label for="input-release-date" class="col-lg-2 control-label">Release Date</label>
                 <div class="col-lg-10">
-                    <input type="date" id="input-release-date" class="form-control" ng-model="tvSeries.releaseDate" required>
+                    <input type="date" id="input-release-date" class="form-control" value="{{vm.tvSeries.releaseDate}}" ng-model="vm.tvSeries.releaseDate">
                 </div>
             </div>
             <div class="form-group">
                 <label for="input-runtime-minutes" class="col-lg-2 control-label">Runtime (min)</label>
                 <div class="col-lg-10">
-                    <input type="number" id="input-runtime-minutes" min="0" class="form-control" ng-model="tvSeries.runtimeMinutes">
+                    <input type="number" id="input-runtime-minutes" min="0" class="form-control" ng-model="vm.tvSeries.runtimeMinutes">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if="vm.tvSeries.description">
                 <label for="input-description" class="col-lg-2 control-label">Description</label>
                 <div class="col-lg-10">
-                    <textarea id="input-description" class="form-control" rows="3" ng-model="tvSeries.description"></textarea>
+                    <textarea id="input-description" class="form-control" rows="3" ng-model="vm.tvSeries.description"></textarea>
                 </div>
             </div>
             <div class="col-lg-10 col-lg-offset-2">
                 <button type="reset" class="btn btn-default">Clear</button>
-                <button class="btn btn-success" ng-click="vm.addTvSeries(tvSeries)" ng-disabled="addTvSeriesForm.$invalid">Save</button>
+                <button class="btn btn-success" ng-click="vm.editTvSeries(vm.tvSeries)" ng-disabled="addTvSeriesForm.$invalid">Edit</button>
             </div>
         </fieldset>
     </form>

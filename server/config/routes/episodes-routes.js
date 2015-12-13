@@ -11,7 +11,8 @@ module.exports = function(app) {
         .get('/:id', episodesController.getById)
         .get('/:tvSeriesId/:season/:number', episodesController.getByTvSeriesIdSeasonAndNumber)
         .get('/', identity.requiresAuthentication(), episodesController.getAll)
-        .post('/', identity.requiresAuthentication(), episodesController.createEpisode);
+        .post('/', identity.requiresAuthentication(), episodesController.createEpisode)
+        .put('/:id', identity.requiresAuthentication(), episodesController.editEpisode);
 
     app.use('/api/episodes', router);
 };
