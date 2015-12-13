@@ -13,7 +13,8 @@ module.exports = function(app) {
         .delete('/:id', identity.requiresAuthentication(), episodesController.deleteEpisode)
         .get('/:tvSeriesId/:season/:number', episodesController.getByTvSeriesIdSeasonAndNumber)
         .get('/', identity.requiresAuthentication(), episodesController.getAll)
-        .post('/', identity.requiresAuthentication(), episodesController.createEpisode);
+        .post('/', identity.requiresAuthentication(), episodesController.createEpisode)
+        .post('/setLastWatchedEpisode', identity.requiresAuthentication(), episodesController.setLastWatchedEpisode);
 
     app.use('/api/episodes', router);
 };

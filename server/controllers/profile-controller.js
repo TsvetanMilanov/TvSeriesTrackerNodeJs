@@ -165,8 +165,6 @@ module.exports = {
                     return;
                 }
 
-                console.log(data);
-
                 let firstEpisode = data[0];
 
                 UsersTvSeries.create({

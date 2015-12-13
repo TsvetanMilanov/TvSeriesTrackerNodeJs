@@ -54,6 +54,12 @@
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
+                .when('/episodes/:tvSeriesId/edit/:episodeId/setLastWatchedEpisode', {
+                    template: '',
+                    controller: 'SetLastWatchedEpisodeController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
                 .when('/episodes/:tvSeriesId/edit/:episodeId', {
                     templateUrl: '/partials/episodes/edit-episode',
                     controller: 'EditEpisodeController',

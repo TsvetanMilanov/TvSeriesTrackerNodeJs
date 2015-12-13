@@ -1,6 +1,7 @@
 'use strict';
 let mongoose = require('mongoose'),
     Episode = mongoose.connection.model('Episode'),
+    UsersTvSeries = mongoose.connection.model('UsersTvSeries'),
     identity = require('./../common/identity'),
     constants = require('./../common/constants'),
     modelValidator = require('./../common/model-validator');
@@ -191,6 +192,59 @@ module.exports = {
             }
 
             res.sendStatus(200);
+        });
+    },
+    setLastWatchedEpisode: function(req, res) {
+        let tvSeriesId = req.body.tvSeriesId,
+            episodeId = req.body.episodeId;
+
+        UsersTvSeries.findOne({
+            userId: req.user._id,
+            tvSeriesId: tvSeriesId
+        }, function(err, data) {
+            if (err) {
+                console.log(err);
+                res.status(400)
+                    .json({
+                        message: 'Can\'t load the information for the TV Series with last watched episode.'
+                    });
+                return;
+            }
+
+            if (!data) {
+                UsersTvSeries.create({
+                    userId: req.user._id,
+                    tvSeriesId: tvSeriesId,
+                    lastWatchedEpisodeId: episodeId
+                }, function(err, createdItem) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400)
+                            .json({
+                                message: 'Can\'t create new item to the Users - TV Series table.'
+                            });
+                        return;
+                    }
+
+                    res.json(createdItem);
+                    return;
+                });
+            } else {
+                data.lastWatchedEpisodeId = episodeId;
+
+                data.save(function(err, editedItem) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400)
+                            .json({
+                                message: 'Can\'t edit the item in the Users - TV Series table.'
+                            });
+                        return;
+                    }
+
+                    res.json(editedItem);
+                });
+            }
         });
     }
 };
