@@ -2,6 +2,7 @@
 let mongoose = require('mongoose'),
     Episode = mongoose.connection.model('Episode'),
     TvSeries = mongoose.connection.model('TvSeries'),
+    UsersTvSeries = mongoose.connection.model('UsersTvSeries'),
     modelValidator = require('./../common/model-validator'),
     identity = require('./../common/identity'),
     constants = require('./../common/constants'),
@@ -169,5 +170,43 @@ module.exports = {
 
             res.sendStatus(200);
         });
+    },
+    subscribeForTvSeries: function(req, res) {
+        let tvSeriesId = req.body.tvSeriesId,
+            userId = req.user._id;
+
+        Episode.find({
+                tvSeriesId: tvSeriesId
+            })
+            .sort('airDate')
+            .exec(function(err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(400)
+                        .json({
+                            message: 'Can\'t subscribe to this TV Series.'
+                        });
+                    return;
+                }
+
+                let firstEpisode = data[0];
+
+                UsersTvSeries.create({
+                    userId: userId,
+                    tvSeriesId: tvSeriesId,
+                    lastWatchedEpisodeId: firstEpisode._id
+                }, function(err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400)
+                            .json({
+                                message: 'Can\'t subscribe to this TV Series.'
+                            });
+                        return;
+                    }
+
+                    res.json(data);
+                });
+            });
     }
 };

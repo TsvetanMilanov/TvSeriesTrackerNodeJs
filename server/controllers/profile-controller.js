@@ -145,43 +145,5 @@ module.exports = {
                         return;
                     });
             });
-    },
-    subscribeForTvSeries: function(req, res) {
-        let tvSeriesId = req.body.tvSeriesId,
-            userId = req.user._id;
-
-        Episode.find({
-                tvSeriesId: tvSeriesId
-            })
-            .sort('airDate')
-            .exec(function(err, data) {
-                if (err) {
-                    console.log(err);
-                    res.status(400)
-                        .json({
-                            message: 'Can\'t subscribe to this TV Series.'
-                        });
-                    return;
-                }
-
-                let firstEpisode = data[0];
-
-                UsersTvSeries.create({
-                    userId: userId,
-                    tvSeriesId: tvSeriesId,
-                    lastWatchedEpisodeId: firstEpisode._id
-                }, function(err, data) {
-                    if (err) {
-                        console.log(err);
-                        res.status(400)
-                            .json({
-                                message: 'Can\'t subscribe to this TV Series.'
-                            });
-                        return;
-                    }
-
-                    res.json(data);
-                });
-            });
     }
 };

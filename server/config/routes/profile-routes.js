@@ -9,8 +9,7 @@ module.exports = function(app) {
     router
         .get('/myTvSeriesWithNewEpisodes', identity.requiresAuthentication(), profileController.getMyTvSeriesWithNewEpisodes)
         .get('/myLastAiredEpisodes', identity.requiresAuthentication(), profileController.getMyLastAiredEpisodes)
-        .get('/myTvSeries', identity.requiresAuthentication(), profileController.getMyTvSeries)
-        .post('/subscribe', identity.requiresAuthentication(), profileController.subscribeForTvSeries);
+        .get('/myTvSeries', identity.requiresAuthentication(), profileController.getMyTvSeries);
 
     app.use('/api/profile', router);
 };

@@ -6,7 +6,7 @@
             headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
         };
 
-        $http.post('/api/profile/subscribe', {
+        $http.post('/api/tvSeries/subscribe', {
                 tvSeriesId: $routeParams.id
             }, config)
             .then(function() {

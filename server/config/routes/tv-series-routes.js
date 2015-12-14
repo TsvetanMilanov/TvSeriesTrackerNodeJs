@@ -11,6 +11,7 @@ module.exports = function(app) {
         .put('/:id', identity.requiresAuthentication(), tvSeriesController.editTvSeries)
         .delete('/:id', identity.requiresAuthentication(), tvSeriesController.deleteTvSeries)
         .get('/', tvSeriesController.getAll)
+        .post('/subscribe', identity.requiresAuthentication(), tvSeriesController.subscribeForTvSeries)
         .post('/', identity.requiresAuthentication(), tvSeriesController.createTvSeries);
 
     app.use('/api/tvSeries', router);
