@@ -16,6 +16,7 @@
                 <th>Title</th>
                 <th>Last Watched Episode</th>
                 <th>Last Aired Episode</th>
+                <th>Unsubscribe</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                 </td>
                 <td ng-repeat="episode in vm.lastAiredEpisodes | filter: {tvSeriesId: tvSeries._id} |  limitTo: 1 : 0">
                     <a href="#/episodes/{{episode._id}}">{{episode.title}}</a>
+                </td>
+                <td>
+                    <a href="#/unsubscribe/{{tvSeries._id}}" class="btn btn-danger">Unsubscribe</a>
                 </td>
             </tr>
         </tbody>

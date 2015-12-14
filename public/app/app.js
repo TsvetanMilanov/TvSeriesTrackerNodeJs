@@ -42,6 +42,12 @@
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
+                .when('/unsubscribe/:id', {
+                    template: '',
+                    controller: 'UnsubscribeFromTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
                 .when('/myTvSeriesWithNewEpisodes', {
                     templateUrl: '/partials/tv-series/list-tv-series',
                     controller: 'MyTvSeriesWithNewEpisodesController',
