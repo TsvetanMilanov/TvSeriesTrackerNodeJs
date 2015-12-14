@@ -9,6 +9,7 @@ module.exports = function(app) {
     router
         .get('/:id', tvSeriesController.getById)
         .put('/:id', identity.requiresAuthentication(), tvSeriesController.editTvSeries)
+        .delete('/unsubscribe/:id', identity.requiresAuthentication(), tvSeriesController.unsubscribeFromTvSeries)
         .delete('/:id', identity.requiresAuthentication(), tvSeriesController.deleteTvSeries)
         .get('/', tvSeriesController.getAll)
         .post('/subscribe', identity.requiresAuthentication(), tvSeriesController.subscribeForTvSeries)

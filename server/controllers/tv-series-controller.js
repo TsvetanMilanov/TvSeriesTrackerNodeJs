@@ -208,5 +208,25 @@ module.exports = {
                     res.json(data);
                 });
             });
+    },
+    unsubscribeFromTvSeries: function(req, res) {
+        let userId = req.user._id,
+            tvSeriesId = req.params.id;
+
+        UsersTvSeries.remove({
+            userId: userId,
+            tvSeriesId: tvSeriesId
+        }, function(err, data) {
+            if (err) {
+                console.log(err);
+                res.status(400)
+                    .json({
+                        message: 'Can\'t unsubscribe from this TV Series.'
+                    });
+                return;
+            }
+
+            res.json(data);
+        });
     }
 };
