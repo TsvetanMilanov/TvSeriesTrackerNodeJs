@@ -11,7 +11,7 @@ module.exports = function(app) {
         .get('/', identity.requiresAuthentication(), reportsController.getAll)
         .post('/', identity.requiresAuthentication(), reportsController.createReport)
         .put('/handle/:id', identity.requiresAuthentication(), reportsController.handleReport)
-        .put('/delete/:id', identity.requiresAuthentication(), reportsController.deleteReport)
+        .delete('/:id', identity.requiresAuthentication(), reportsController.deleteReport)
         .put('/', identity.requiresAuthentication(), reportsController.editReport);
 
     app.use('/api/reports', router);
