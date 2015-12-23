@@ -30,6 +30,14 @@ module.exports = function() {
             required: true,
             min: constants.REPORT_TYPE_TV_SERIES,
             max: constants.REPORT_TYPE_EPISODE
+        },
+        episodeId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Episode'
+        },
+        tvSeriesId: {
+            type: Schema.Types.ObjectId,
+            ref: 'TvSeries'
         }
     });
 
