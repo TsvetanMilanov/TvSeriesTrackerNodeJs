@@ -7,14 +7,15 @@ module.exports = function() {
     let schema = new Schema({
         description: {
             type: String,
-            required: true
+            required: true,
+            minlength: constants.MIN_REPORT_DESCRIPTION_LENGTH
         },
         authorId: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
         },
-        date: {
+        createdOn: {
             type: Date,
             required: true,
             default: new Date(Date.now())
@@ -38,6 +39,11 @@ module.exports = function() {
         tvSeriesId: {
             type: Schema.Types.ObjectId,
             ref: 'TvSeries'
+        },
+        isHandled: {
+            type: Boolean,
+            required: true,
+            default: false
         }
     });
 

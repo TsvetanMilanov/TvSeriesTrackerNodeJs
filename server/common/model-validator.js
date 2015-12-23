@@ -35,6 +35,10 @@ module.exports = {
             return false;
         }
 
+        if (model.type != constants.REPORT_TYPE_EPISODE || model.type != constants.REPORT_TYPE_TV_SERIES) {
+            return false;
+        }
+
         return true;
     },
     isEpisodeRequestModelValid: function(model) {
@@ -47,6 +51,36 @@ module.exports = {
         }
 
         if (model.seasonNumber < 0 || model.number < 0) {
+            return false;
+        }
+
+        return true;
+    },
+    isReportCreateRequestModelValid: function(model) {
+        if (!model.description ||
+            !model.type ||
+            (!model.episodeId && !model.tvSeriesId) ||
+            !model.importance) {
+            return false;
+        }
+
+        if (model.description.length < constants.MIN_REPORT_DESCRIPTION_LENGTH) {
+            return false;
+        }
+
+        return true;
+    },
+    isReportEditRequestModelValid: function(model) {
+        if (!model.description ||
+            !model.type ||
+            (!model.episodeId && !model.tvSeriesId) ||
+            !model.importance ||
+            !model.authorId ||
+            !model.createdOn) {
+            return false;
+        }
+
+        if (model.description.length < constants.MIN_REPORT_DESCRIPTION_LENGTH) {
             return false;
         }
 
