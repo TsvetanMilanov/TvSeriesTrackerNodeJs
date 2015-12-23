@@ -10,6 +10,9 @@ angular.module('app').factory('constants', function() {
         MIN_PASSWORD_LENGTH: 6,
         MIN_TOKEN_LENGTH: 10,
         TOKEN_LENGTH: 200,
-        DEFAULT_DATE_FORMAT: 'DD-MM-YYYY hh:mm:ss'
+        DEFAULT_DATE_FORMAT: 'DD-MM-YYYY hh:mm:ss',
+        REPORT_TYPE_TV_SERIES: 0,
+        REPORT_TYPE_EPISODE: 1,
+        MIN_REPORT_DESCRIPTION_LENGTH: 5
     };
 });

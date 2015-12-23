@@ -5,6 +5,7 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('sha1', sha1)
+        .constant('baseUrl', 'http://localhost:4000')
         .config(function($routeProvider) {
             var routeAuthChecker = {
                     isAdmin: {
@@ -39,6 +40,12 @@
                 .when('/subscribe/:id', {
                     template: '',
                     controller: 'SubscribeForTvSeriesController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
+                .when('/report/:type/:id', {
+                    templateUrl: '/partials/reports/add-report.html',
+                    controller: 'AddReportController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
