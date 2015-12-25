@@ -31,6 +31,31 @@ module.exports = {
             res.json(response);
         });
     },
+    getById: function(req, res) {
+        let currentUser = req.user,
+            id = req.params.id;
+
+        if (!identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE)) {
+            res.status(401)
+                .json({
+                    message: 'You are not authorized to get this information.'
+                });
+            return;
+        }
+
+        Report.findOne({
+            _id: id
+        }, function(err, response) {
+            if (err) {
+                console.log(err);
+                res.status(401)
+                    .json(err);
+                return;
+            }
+            res.json(response);
+        });
+    },
     getFiltered: function(req, res) {
         let currentUser = req.user,
             parts = url.parse(req.url, true),
@@ -210,7 +235,7 @@ module.exports = {
             if (body && body.comment) {
                 report.comment = body.comment;
             }
-            
+
             report.isHandled = true;
             report.save(function(err) {
                 if (err) {

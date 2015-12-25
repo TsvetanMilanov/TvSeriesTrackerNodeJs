@@ -9,6 +9,7 @@ module.exports = function(app) {
     router
         .get('/filtered', identity.requiresAuthentication(), reportsController.getFiltered)
         .get('/', identity.requiresAuthentication(), reportsController.getAll)
+        .get('/:id', identity.requiresAuthentication(), reportsController.getById)
         .post('/', identity.requiresAuthentication(), reportsController.createReport)
         .put('/handle/:id', identity.requiresAuthentication(), reportsController.handleReport)
         .delete('/:id', identity.requiresAuthentication(), reportsController.deleteReport)

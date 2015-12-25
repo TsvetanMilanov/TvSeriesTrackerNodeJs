@@ -14,8 +14,13 @@
             return data.put('api/reports/handle/' + id, report);
         }
 
+        function getById(id) {
+            return data.get('api/reports/' + id);
+        }
+
         return {
             get: get,
+            getById: getById,
             addReport: addReport,
             handleReport: handleReport
         };

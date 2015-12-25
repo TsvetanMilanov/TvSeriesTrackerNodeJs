@@ -37,11 +37,17 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
+                .when('/reports/:id', {
+                    templateUrl: '/partials/reports/report-details.html',
+                    controller: 'ReportDetailsController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/reports/handle/:id', {
                     templateUrl: '/partials/reports/handle-report.html',
                     controller: 'HandleReportController',
                     controllerAs: CONTROLLER_VM_NAME,
-                    resolve: routeAuthChecker.isAuthenticated
+                    resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/reports/:type/:id', {
                     templateUrl: '/partials/reports/add-report.html',
