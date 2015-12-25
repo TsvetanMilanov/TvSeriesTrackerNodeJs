@@ -153,8 +153,7 @@ module.exports = {
     },
     editReport: function(req, res) {
         let currentUser = req.user,
-            requestModel = req.body,
-            id = req.params.id;
+            requestModel = req.body;
 
         if (!identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE) &&
             !identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE)) {
@@ -174,7 +173,7 @@ module.exports = {
         }
 
         Report.findOne({
-            _id: id
+            _id: requestModel._id
         }, function(err, report) {
             if (err || !report) {
                 res.status(404)

@@ -43,6 +43,12 @@
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
+                .when('/reports/edit/:id', {
+                    templateUrl: '/partials/reports/edit-report.html',
+                    controller: 'EditReportController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isModeratorOrAdmin
+                })
                 .when('/reports/handle/:id', {
                     templateUrl: '/partials/reports/handle-report.html',
                     controller: 'HandleReportController',

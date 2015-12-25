@@ -17,21 +17,33 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="isHandled" class="col-lg-2 control-label">Is Handled</label>
+                        <div class="col-lg-10">
+                            <input type="checkbox" class="form-control" id="isHandled" ng-disabled="true" ng-model="vm.report.isHandled">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="col-lg-2 control-label">Type</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="type" ng-disabled="true" ng-model="vm.report.type">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="importance" class="col-lg-2 control-label">Importance</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-controll" id="importance" ng-disabled="true" ng-value="vm.report.importance">
+                            <input type="text" class="form-control" id="importance" ng-disabled="true" ng-value="vm.report.importance">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="authorId" class="col-lg-2 control-label">Author Id</label>
                         <div class="col-lg-10">
-                            <a href="#/users/profile/{{vm.report.authorId}}" class="form-controll" id="authorId" ng-disabled="true" ng-value="vm.report.authorId">{{vm.report.authorId}}</a>
+                            <a href="#/users/profile/{{vm.report.authorId}}" class="form-control" id="authorId" ng-disabled="true" ng-value="vm.report.authorId">{{vm.report.authorId}}</a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="createdOn" class="col-lg-2 control-label">Created On</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-controll" id="createdOn" ng-disabled="true" ng-value="vm.report.createdOn | date: 'dd.MM.yyyy'">
+                            <input type="text" class="form-control" id="createdOn" ng-disabled="true" ng-value="vm.report.createdOn | date: 'dd.MM.yyyy'">
                         </div>
                     </div>
                     <div class="form-group">

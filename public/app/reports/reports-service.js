@@ -18,11 +18,16 @@
             return data.get('api/reports/' + id);
         }
 
+        function editReport(report) {
+            return data.put('api/reports', report);
+        }
+
         return {
             get: get,
             getById: getById,
             addReport: addReport,
-            handleReport: handleReport
+            handleReport: handleReport,
+            editReport: editReport
         };
     }
 

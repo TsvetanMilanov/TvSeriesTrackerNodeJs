@@ -72,11 +72,15 @@ module.exports = {
     },
     isReportEditRequestModelValid: function(model) {
         if (!model.description ||
-            !model.type ||
+            model.type === undefined ||
             (!model.episodeId && !model.tvSeriesId) ||
             !model.importance ||
             !model.authorId ||
             !model.createdOn) {
+            return false;
+        }
+
+        if (model.type != constants.REPORT_TYPE_EPISODE && model.type != constants.REPORT_TYPE_TV_SERIES) {
             return false;
         }
 

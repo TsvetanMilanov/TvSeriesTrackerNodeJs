@@ -24,7 +24,11 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    defered.reject(err.data);
+                    if (err.data.message) {
+                        defered.reject(err.data.message);
+                    } else {
+                        defered.reject(err.data);
+                    }
                 });
 
             return defered.promise;
@@ -39,7 +43,11 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    defered.reject(err.data);
+                    if (err.data.message) {
+                        defered.reject(err.data.message);
+                    } else {
+                        defered.reject(err.data);
+                    }
                 });
 
             return defered.promise;
@@ -54,7 +62,11 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    defered.reject(err.data);
+                    if (err.data.message) {
+                        defered.reject(err.data.message);
+                    } else {
+                        defered.reject(err.data);
+                    }
                 });
 
             return defered.promise;
