@@ -18,6 +18,17 @@
                 });
         };
 
+        vm.unhandleReport = function(id) {
+            reports.unhandleReport(id)
+                .then(function() {
+                    toastr.success('Report unhandled.');
+                    $location.path('/reports/' + id);
+                })
+                .catch(function(err) {
+                    toastr.error(err);
+                });
+        };
+
         vm.getAllUsers = function() {
             var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
 

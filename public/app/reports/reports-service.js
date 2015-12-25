@@ -14,6 +14,10 @@
             return data.put('api/reports/handle/' + id, report);
         }
 
+        function unhandleReport(id, report) {
+            return data.put('api/reports/unhandle/' + id, report);
+        }
+
         function getById(id) {
             return data.get('api/reports/' + id);
         }
@@ -31,6 +35,7 @@
             getById: getById,
             addReport: addReport,
             handleReport: handleReport,
+            unhandleReport: unhandleReport,
             editReport: editReport,
             deleteReport: deleteReport
         };

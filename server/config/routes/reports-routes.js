@@ -12,6 +12,7 @@ module.exports = function(app) {
         .get('/:id', identity.requiresAuthentication(), reportsController.getById)
         .post('/', identity.requiresAuthentication(), reportsController.createReport)
         .put('/handle/:id', identity.requiresAuthentication(), reportsController.handleReport)
+        .put('/unhandle/:id', identity.requiresAuthentication(), reportsController.unhandleReport)
         .delete('/:id', identity.requiresAuthentication(), reportsController.deleteReport)
         .put('/', identity.requiresAuthentication(), reportsController.editReport);
 

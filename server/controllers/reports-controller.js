@@ -24,7 +24,7 @@ module.exports = {
         Report.find({}, function(err, response) {
             if (err) {
                 console.log(err);
-                res.status(401)
+                res.status(400)
                     .json(err);
                 return;
             }
@@ -49,7 +49,7 @@ module.exports = {
         }, function(err, response) {
             if (err) {
                 console.log(err);
-                res.status(401)
+                res.status(400)
                     .json(err);
                 return;
             }
@@ -224,7 +224,7 @@ module.exports = {
             _id: id
         }, function(err, report) {
             if (err || !report) {
-                res.status(404)
+                res.status(400)
                     .json({
                         message: 'There is no report with such id.'
                     });
@@ -236,6 +236,47 @@ module.exports = {
             }
 
             report.isHandled = true;
+            report.save(function(err) {
+                if (err) {
+                    res.send(400)
+                        .json({
+                            message: 'Cannot handle this report.',
+                            erro: err
+                        });
+                    return;
+                }
+
+                res.json({
+                    message: 'Report was handled successfully.'
+                });
+            });
+        });
+    },
+    unhandleReport: function(req, res) {
+        let currentUser = req.user,
+            id = req.params.id;
+
+        if (!identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE) &&
+            !identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE)) {
+            res.status(400)
+                .json({
+                    message: 'You are not authorized to get this information.'
+                });
+            return;
+        }
+
+        Report.findOne({
+            _id: id
+        }, function(err, report) {
+            if (err || !report) {
+                res.status(400)
+                    .json({
+                        message: 'There is no report with such id.'
+                    });
+                return;
+            }
+
+            report.isHandled = false;
             report.save(function(err) {
                 if (err) {
                     res.send(400)

@@ -58,6 +58,7 @@
                 </td>
                 <td>
                     <a href="#/reports/handle/{{report._id}}" class="btn btn-success" ng-if="report.isHandled == false">Handle</a>
+                    <button class="btn btn-info" ng-if="report.isHandled" ng-click="vm.unhandleReport(report._id)">Unhandle</button>
                 </td>
             </tr>
         </tbody>
