@@ -12,6 +12,17 @@
             .catch(function(err) {
                 toastr.error(err);
             });
+
+        vm.deleteReport = function() {
+            reports.deleteReport(vm.report._id)
+                .then(function() {
+                    toastr.success('Report deleted.');
+                    $location.path('/administration');
+                })
+                .catch(function(err) {
+                    toastr.error(err);
+                });
+        };
     }
 
     angular.module('app')

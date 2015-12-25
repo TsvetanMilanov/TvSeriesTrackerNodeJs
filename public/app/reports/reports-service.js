@@ -22,12 +22,17 @@
             return data.put('api/reports', report);
         }
 
+        function deleteReport(id) {
+            return data.delete('api/reports/' + id);
+        }
+
         return {
             get: get,
             getById: getById,
             addReport: addReport,
             handleReport: handleReport,
-            editReport: editReport
+            editReport: editReport,
+            deleteReport: deleteReport
         };
     }
 

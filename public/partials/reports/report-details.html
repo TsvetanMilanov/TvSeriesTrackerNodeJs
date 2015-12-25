@@ -50,7 +50,7 @@
                         <div class="col-lg-10 col-lg-offset-2">
                             <a href="#/reports/handle/{{vm.report._id}}" class="btn btn-success" ng-if="vm.report.isHandled == false">Handle</a>
                             <a href="#/reports/edit/{{vm.report._id}}" class="btn btn-info">Edit</a>
-                            <a href="#/reports/delete/{{vm.report._id}}" class="btn btn-danger">Delete</a>
+                            <button class="btn btn-danger" ng-click="vm.deleteReport()">Delete</button>
                         </div>
                     </div>
                 </fieldset>

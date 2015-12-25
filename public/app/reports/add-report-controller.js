@@ -21,8 +21,15 @@
                 }
 
                 reports.addReport(report)
-                    .then(function() {
+                    .then(function(savedReport) {
                         toastr.success('Report saved!');
+
+                        if (savedReport.tvSeriesId) {
+                            $location.path('tvSeries/' + savedReport.tvSeriesId);
+                        } else {
+                            $location.path('tvSeries/' + savedReport.episodeId);
+                        }
+
                     }, function(err) {
                         toastr.error(err.message);
                     });
