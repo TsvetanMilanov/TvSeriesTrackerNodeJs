@@ -3,7 +3,9 @@
 
     function AdministrationController($location, $http, toastr, identity, requestHelper, constants, reports) {
         var vm = this;
+
         vm.identity = identity;
+        vm.type = 0;
 
         function getReports(type) {
             return reports.get({
@@ -11,8 +13,33 @@
             });
         }
 
-        vm.getAllTvSeriesReports = function() {
-            getReports(constants.REPORT_TYPE_TV_SERIES)
+        vm.setType = function(type) {
+            vm.reports = [];
+            vm.type = type;
+        };
+
+        vm.getAllReports = function() {
+            getReports(vm.type)
+                .then(function(reports) {
+                    vm.reports = reports;
+                });
+        };
+
+        vm.getHandledReports = function() {
+            reports.get({
+                    type: vm.type,
+                    isHandled: true
+                })
+                .then(function(reports) {
+                    vm.reports = reports;
+                });
+        };
+
+        vm.getNotHandledReports = function() {
+            reports.get({
+                    type: vm.type,
+                    isHandled: false
+                })
                 .then(function(reports) {
                     vm.reports = reports;
                 });

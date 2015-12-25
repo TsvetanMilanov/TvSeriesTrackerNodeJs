@@ -11,9 +11,9 @@
 
         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-administration-reports" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav">
-                <li><a href="" ng-click="vm.getAllTvSeriesReports()">All reports</a></li>
-                <li><a href="" ng-click="vm.getNotHandledTvSeriesReports()">Not handled reports</a></li>
-                <li><a href="" ng-click="vm.getHandledTvSeriesReports()">Handled reports</a></li>
+                <li><a href="" ng-click="vm.getAllReports()">All reports</a></li>
+                <li><a href="" ng-click="vm.getNotHandledReports()">Not handled reports</a></li>
+                <li><a href="" ng-click="vm.getHandledReports()">Handled reports</a></li>
             </ul>
         </div>
     </div>
@@ -27,7 +27,8 @@
                 <th class="text-center">Importance</th>
                 <th class="text-center">Author Id</th>
                 <th class="text-center">Created On</th>
-                <th class="text-center">TV Series Id</th>
+                <th class="text-center" ng-if="vm.type == 0">TV Series Id</th>
+                <th class="text-center" ng-if="vm.type == 1">Episode Id</th>
                 <th class="text-center">Is Handled</th>
                 <th class="text-center">Handle</th>
             </tr>
@@ -49,8 +50,11 @@
                 <td>
                     {{report.createdOn | date: 'dd.MM.yyyy'}}
                 </td>
-                <td>
+                <td ng-if="vm.type == 0">
                     <a href="#/tvSeries/{{report.tvSeriesId}}">{{report.tvSeriesId}}</a>
+                </td>
+                <td ng-if="vm.type == 1">
+                    <a href="#/episodes/{{report.episodeId}}">{{report.episodeId}}</a>
                 </td>
                 <td>
                     <img ng-src="./../../img/Success.png" ng-if="report.isHandled" class="status-img">

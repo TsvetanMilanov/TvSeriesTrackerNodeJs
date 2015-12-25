@@ -1,8 +1,8 @@
 <div class="container">
     <ul class="nav nav-tabs" id="tabs">
         <li class="active"><a href="#users" data-toggle="tab">Users</a></li>
-        <li><a href="#reported-tv-series" data-toggle="tab">Reported TV Series</a></li>
-        <li><a href="#reported-episodes" data-toggle="tab">Reported Episodes</a></li>
+        <li><a href="#reported-tv-series" data-toggle="tab" ng-click="vm.setType(0)">Reported TV Series</a></li>
+        <li><a href="#reported-episodes" data-toggle="tab" ng-click="vm.setType(1)">Reported Episodes</a></li>
         <li><a href="#statistics" data-toggle="tab">Statistics</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
@@ -11,12 +11,14 @@
         </div>
         <div class="tab-pane fade" id="reported-tv-series">
             <div class="container">
-                <div ng-include src="'partials/administration/reported-tv-series-administration'"></div>
+                <div ng-include src="'partials/administration/reports-administration'"></div>
             </div>
         </div>
         <div class="tab-pane fade" id="reported-episodes">
             <div class="container">
-                <h4>Reported Episodes</h4>
+                <div class="container">
+                    <div ng-include src="'partials/administration/reports-administration'"></div>
+                </div>
             </div>
         </div>
         <div class="tab-pane fade" id="statistics">

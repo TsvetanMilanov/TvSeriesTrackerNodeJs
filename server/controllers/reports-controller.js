@@ -103,7 +103,7 @@ module.exports = {
             Episode.findOne({
                 _id: requestModel.episodeId
             }, function(err, episode) {
-                if (!err || !episode) {
+                if (err || !episode) {
                     res.status(400)
                         .json({
                             message: 'There is no episode with such id to report.'

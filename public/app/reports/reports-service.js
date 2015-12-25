@@ -7,7 +7,7 @@
         }
 
         function get(filter) {
-            return data.get('api/reports', filter);
+            return data.get('api/reports/filtered', filter);
         }
 
         function handleReport(id, report) {

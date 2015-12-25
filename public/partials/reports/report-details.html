@@ -16,6 +16,18 @@
                             <textarea class="form-control" rows="3" id="comment" ng-disabled="true" ng-bind="vm.report.comment"></textarea>
                         </div>
                     </div>
+                    <div class="form-group" ng-if="vm.report.tvSeriesId">
+                        <label for="tvSeriesId" class="col-lg-2 control-label">TV Series Id</label>
+                        <div class="col-lg-10">
+                            <a href="#/tvSeries/{{vm.report.tvSeriesId}}" type="text" class="form-control" id="tvSeriesId">{{vm.report.tvSeriesId}}</a>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="vm.report.episodeId">
+                        <label for="episodeId" class="col-lg-2 control-label">Episode Id</label>
+                        <div class="col-lg-10">
+                            <a href="#/episodes/{{vm.report.episodeId}}" type="text" class="form-control" id="episodeId">{{vm.report.episodeId}}</a>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="isHandled" class="col-lg-2 control-label">Is Handled</label>
                         <div class="col-lg-10">
@@ -37,7 +49,7 @@
                     <div class="form-group">
                         <label for="authorId" class="col-lg-2 control-label">Author Id</label>
                         <div class="col-lg-10">
-                            <a href="#/users/profile/{{vm.report.authorId}}" class="form-control" id="authorId" ng-disabled="true" ng-value="vm.report.authorId">{{vm.report.authorId}}</a>
+                            <a href="#/users/profile/{{vm.report.authorId}}" class="form-control" id="authorId" ng-value="vm.report.authorId">{{vm.report.authorId}}</a>
                         </div>
                     </div>
                     <div class="form-group">

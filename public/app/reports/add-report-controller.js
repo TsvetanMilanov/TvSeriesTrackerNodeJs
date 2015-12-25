@@ -27,11 +27,11 @@
                         if (savedReport.tvSeriesId) {
                             $location.path('tvSeries/' + savedReport.tvSeriesId);
                         } else {
-                            $location.path('tvSeries/' + savedReport.episodeId);
+                            $location.path('episodes/' + savedReport.episodeId);
                         }
 
                     }, function(err) {
-                        toastr.error(err.message);
+                        toastr.error(err);
                     });
             } else {
                 toastr.info('Please fill all the fields.');
