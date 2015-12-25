@@ -10,6 +10,9 @@ module.exports = function() {
             required: true,
             minlength: constants.MIN_REPORT_DESCRIPTION_LENGTH
         },
+        comment: {
+            type: String
+        },
         authorId: {
             type: Schema.Types.ObjectId,
             ref: 'User',

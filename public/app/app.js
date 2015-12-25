@@ -37,15 +37,21 @@
                 CONTROLLER_VM_NAME = 'vm';
 
             $routeProvider
-                .when('/subscribe/:id', {
-                    template: '',
-                    controller: 'SubscribeForTvSeriesController',
+                .when('/reports/handle/:id', {
+                    templateUrl: '/partials/reports/handle-report.html',
+                    controller: 'HandleReportController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
-                .when('/report/:type/:id', {
+                .when('/reports/:type/:id', {
                     templateUrl: '/partials/reports/add-report.html',
                     controller: 'AddReportController',
+                    controllerAs: CONTROLLER_VM_NAME,
+                    resolve: routeAuthChecker.isAuthenticated
+                })
+                .when('/subscribe/:id', {
+                    template: '',
+                    controller: 'SubscribeForTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })

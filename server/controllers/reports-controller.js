@@ -184,7 +184,8 @@ module.exports = {
     },
     handleReport: function(req, res) {
         let currentUser = req.user,
-            id = req.params.id;
+            id = req.params.id,
+            body = req.body;
 
         if (!identity.isAuthorizedForRole(currentUser, constants.ADMIN_ROLE) &&
             !identity.isAuthorizedForRole(currentUser, constants.MODERATOR_ROLE)) {
@@ -206,6 +207,10 @@ module.exports = {
                 return;
             }
 
+            if (body && body.comment) {
+                report.comment = body.comment;
+            }
+            
             report.isHandled = true;
             report.save(function(err) {
                 if (err) {

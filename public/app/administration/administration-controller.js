@@ -1,9 +1,22 @@
 (function() {
     'use strict';
 
-    function AdministrationController($location, $http, toastr, identity, requestHelper) {
+    function AdministrationController($location, $http, toastr, identity, requestHelper, constants, reports) {
         var vm = this;
         vm.identity = identity;
+
+        function getReports(type) {
+            return reports.get({
+                type: type
+            });
+        }
+
+        vm.getAllTvSeriesReports = function() {
+            getReports(constants.REPORT_TYPE_TV_SERIES)
+                .then(function(reports) {
+                    vm.reports = reports;
+                });
+        };
 
         vm.getAllUsers = function() {
             var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
@@ -18,6 +31,7 @@
                     headers: headers
                 })
                 .then(function(data) {
+                    console.log(data.data);
                     vm.users = data.data;
                 })
                 .catch(function(err) {
@@ -49,5 +63,5 @@
     }
 
     angular.module('app')
-        .controller('AdministrationController', ['$location', '$http', 'toastr', 'identity', 'requestHelper', AdministrationController]);
+        .controller('AdministrationController', ['$location', '$http', 'toastr', 'identity', 'requestHelper', 'constants', 'reports', AdministrationController]);
 }());

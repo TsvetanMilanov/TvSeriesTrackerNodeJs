@@ -1,0 +1,65 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-administration-reports" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-administration-reports" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav">
+                <li><a href="" ng-click="vm.getAllTvSeriesReports()">All reports</a></li>
+                <li><a href="" ng-click="vm.getNotHandledTvSeriesReports()">Not handled reports</a></li>
+                <li><a href="" ng-click="vm.getHandledTvSeriesReports()">Handled reports</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">_id</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Importance</th>
+                <th class="text-center">Author Id</th>
+                <th class="text-center">Created On</th>
+                <th class="text-center">TV Series Id</th>
+                <th class="text-center">Is Handled</th>
+                <th class="text-center">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="report in vm.reports | orderBy: '-importance'">
+                <td>
+                    <a href="#/reports/{{report._id}}">{{report._id}}</a>
+                </td>
+                <td>
+                    <textarea cols="30" rows="5" ng-disabled="true">{{report.description}}</textarea>
+                </td>
+                <td>
+                    {{report.importance}}
+                </td>
+                <td>
+                    <a href="#/users/profile/{{report.authorId}}">{{report.authorId}}</a>
+                </td>
+                <td>
+                    {{report.createdOn | date: 'dd.MM.yyyy'}}
+                </td>
+                <td>
+                    <a href="#/tvSeries/{{report.tvSeriesId}}">{{report.tvSeriesId}}</a>
+                </td>
+                <td>
+                    <img ng-src="./../../img/Success.png" ng-if="report.isHandled" class="status-img">
+                    <img ng-src="./../../img/Error.png" ng-if="report.isHandled == false" class="status-img">
+                </td>
+                <td>
+                    <a href="#/reports/handle/{{report._id}}" class="btn btn-success" ng-if="report.isHandled == false">Handle</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

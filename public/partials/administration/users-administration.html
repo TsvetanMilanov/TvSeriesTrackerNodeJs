@@ -39,7 +39,7 @@
                 <td>
                     <input class="form-control" type="checkbox" ng-checked="user.isBanned" disabled>
                 </td>
-                <td ng-show="identity.isAdmin()">{{user.roles}}</td>
+                <td ng-show="vm.identity.isAdmin()">{{user.roles}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td class="wrap-text" ng-show="vm.identity.isAdmin()">{{user.token}}</td>
