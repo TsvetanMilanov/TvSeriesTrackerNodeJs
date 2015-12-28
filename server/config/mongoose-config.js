@@ -14,7 +14,7 @@ module.exports = {
         if (env === 'development') {
             connectionString = 'mongodb://localhost:27017/TvSeriesTracker';
         } else {
-            connectionString = 'mongodb://admin:a1d2m3i4n5>@ds037195.mongolab.com:37195/tv-series-tracker-database';
+            connectionString = 'mongodb://admin:a1d2m3i4n5@ds037195.mongolab.com:37195/tv-series-tracker-database';
         }
 
         modelsLoader.loadModels();
