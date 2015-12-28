@@ -40,31 +40,31 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">Title</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" disabled ng-model="vm.tvSeries.title">
+                    <span class="form-control">{{vm.tvSeries.title}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Rating</label>
                 <div class="col-lg-10">
-                    <input type="number" class="form-control" disabled ng-model="vm.tvSeries.rating">
+                    <span class="form-control">{{vm.tvSeries.rating}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Release Date</label>
                 <div class="col-lg-10">
-                    <input type="date" class="form-control" disabled value={{vm.tvSeries.releaseDate}} ng-model="vm.tvSeries.releaseDate">
+                    <span class="form-control">{{vm.tvSeries.releaseDate | date: 'yyyy-MM-dd'}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-2 control-label">Runtime (min)</label>
                 <div class="col-lg-10">
-                    <input type="number" class="form-control" disabled ng-model="vm.tvSeries.runtimeMinutes">
+                    <span class="form-control">{{vm.tvSeries.runtimeMinutes}}</span>
                 </div>
             </div>
             <div class="form-group" ng-if="vm.tvSeries.description">
                 <label class="col-lg-2 control-label">Description</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" disabled ng-model="vm.tvSeries.description"></textarea>
+                    <span class="form-control">{{vm.tvSeries.description}}</span>
                 </div>
             </div>
         </fieldset>

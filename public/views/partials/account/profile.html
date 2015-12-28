@@ -5,43 +5,43 @@
             <div class="form-group">
                 <label for="inputUserName" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputUserName" value="{{vm.currentUser.userName}}" disabled>
+                    <span class="form-control" id="inputUserName">{{vm.currentUser.userName}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="inputPassword" value="" disabled>
+                    <span class="form-control" id="inputPassword"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputFirstName" class="col-lg-2 control-label">First name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputFirstName" value="{{vm.currentUser.firstName}}" disabled>
+                    <span class="form-control" id="inputFirstName">{{vm.currentUser.firstName}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-lg-2 control-label">Last name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" value="{{vm.currentUser.lastName}}" disabled>
+                    <span class="form-control" id="inputLastName">{{vm.currentUser.lastName}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputRegistrationDate" class="col-lg-2 control-label">Registration date</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRegistrationDate" value="{{vm.currentUser.registrationDate}}" disabled>
+                    <span class="form-control" id="inputRegistrationDate">{{vm.currentUser.registrationDate}}</span>
                 </div>
             </div>
             <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputToken" class="col-lg-2 control-label">Token</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputToken" value="{{vm.currentUser.token}}" disabled>
+                    <span class="form-control" id="inputToken">{{vm.currentUser.token}}</span>
                 </div>
             </div>
             <div class="form-group" ng-show="vm.identity.isAdmin()">
                 <label for="inputRoles" class="col-lg-2 control-label">Roles</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputRoles" value="{{vm.currentUser.roles}}" disabled>
+                    <span class="form-control" id="inputRoles">{{vm.currentUser.roles}}</span>
                 </div>
             </div>
             <div class="form-group" ng-show="vm.identity.isAdmin() || vm.identity.isModerator()">
