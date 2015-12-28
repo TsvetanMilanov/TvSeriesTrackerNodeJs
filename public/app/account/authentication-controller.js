@@ -45,7 +45,12 @@
             $location.path('/');
         };
 
-        vm.registerUser = function(userToRegister) {
+        vm.registerUser = function(userToRegister, agree) {
+            if (!agree) {
+                toastr.info('You must agree with the content of the Information box to register.');
+                return;
+            }
+
             if (userToRegister.userName.length < constants.MIN_USERNAME_LENGTH ||
                 userToRegister.userName.length > constants.MAX_USERNAME_LENGTH) {
                 toastr.error(`Username should be between ${constants.MIN_USERNAME_LENGTH} and ${constants.MAX_USERNAME_LENGTH} symbols long.`);

@@ -26,10 +26,22 @@
                     <input type="text" class="form-control" id="inputLastName" placeholder="Last name" ng-model="vm.userToRegister.lastName">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputLastName" class="col-lg-2 control-label">Important</label>
+                <div class="col-lg-10">
+                    <textarea name="databaseInformation" class="form-control" rows="5">This is an opensource project and all code is in github. This includes the username and the password for the database user. This means that the information in the database can be seen by anybody. The passwords are not saved in their original format - they are hashed. Just in case DO NOT USE PASSWORD THAT YOU USE FOR OTHER THINGS!!! If you agree to register by checking the "I Agree" checkbox and your password gets stolen I am not responsible.</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="iAgree" class="col-lg-2 control-label">I Agree *</label>
+                <div class="col-lg-10">
+                    <input type="checkbox" class="form-control" id="iAgree" ng-model="agree">
+                </div>
+            </div>
             <span class="help-block col-lg-offset-2">Fields with * are required!</span>
             <div class="col-lg-10 col-lg-offset-2">
                 <button type="reset" class="btn btn-default">Clear</button>
-                <button class="btn btn-success" ng-click="vm.registerUser(vm.userToRegister)" ng-disabled="registerForm.$invalid">Register</button>
+                <button class="btn btn-success" ng-click="vm.registerUser(vm.userToRegister, agree)" ng-disabled="registerForm.$invalid">Register</button>
             </div>
 </div>
 </fieldset>
