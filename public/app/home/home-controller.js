@@ -1,10 +1,11 @@
 (function() {
     'use strict';
 
-    function HomeController() {
+    function HomeController(identity) {
         var vm = this;
+        vm.identity = identity;
     }
 
     angular.module('app')
-        .controller('HomeController', [HomeController]);
+        .controller('HomeController', ['identity', HomeController]);
 }());

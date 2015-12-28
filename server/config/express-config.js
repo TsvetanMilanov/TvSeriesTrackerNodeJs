@@ -2,7 +2,7 @@
 let express = require('express'),
     bodyParser = require('body-parser'),
     ejs = require('ejs'),
-    viewsPath = `${__dirname}/../../public`;
+    viewsPath = `${__dirname}/../../public/views`;
 
 module.exports = {
     configure: function(app) {

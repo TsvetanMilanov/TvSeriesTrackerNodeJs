@@ -34,29 +34,30 @@
                         }
                     }
                 },
-                CONTROLLER_VM_NAME = 'vm';
+                CONTROLLER_VM_NAME = 'vm',
+                PARTIALS_DIRECTORY = '/views/partials';
 
             $routeProvider
                 .when('/reports/:id', {
-                    templateUrl: '/partials/reports/report-details.html',
+                    templateUrl: PARTIALS_DIRECTORY + '/reports/report-details.html',
                     controller: 'ReportDetailsController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/reports/edit/:id', {
-                    templateUrl: '/partials/reports/edit-report.html',
+                    templateUrl: PARTIALS_DIRECTORY + '/reports/edit-report.html',
                     controller: 'EditReportController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/reports/handle/:id', {
-                    templateUrl: '/partials/reports/handle-report.html',
+                    templateUrl: PARTIALS_DIRECTORY + '/reports/handle-report.html',
                     controller: 'HandleReportController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/reports/:type/:id', {
-                    templateUrl: '/partials/reports/add-report.html',
+                    templateUrl: PARTIALS_DIRECTORY + '/reports/add-report.html',
                     controller: 'AddReportController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
@@ -74,13 +75,13 @@
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/myTvSeriesWithNewEpisodes', {
-                    templateUrl: '/partials/tv-series/list-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/list-tv-series',
                     controller: 'MyTvSeriesWithNewEpisodesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/myTvSeries', {
-                    templateUrl: '/partials/account/my-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/account/my-tv-series',
                     controller: 'MyTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
@@ -92,13 +93,13 @@
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/episodes/:tvSeriesId/edit/:episodeId', {
-                    templateUrl: '/partials/episodes/edit-episode',
+                    templateUrl: PARTIALS_DIRECTORY + '/episodes/edit-episode',
                     controller: 'EditEpisodeController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/episodes/:id/add', {
-                    templateUrl: '/partials/episodes/add-episode',
+                    templateUrl: PARTIALS_DIRECTORY + '/episodes/add-episode',
                     controller: 'AddEpisodeController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
@@ -110,7 +111,7 @@
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/episodes/:id', {
-                    templateUrl: '/partials/episodes/episode-details',
+                    templateUrl: PARTIALS_DIRECTORY + '/episodes/episode-details',
                     controller: 'EpisodeDetailsController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
@@ -121,63 +122,63 @@
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/tvSeries/:id/episodes', {
-                    templateUrl: '/partials/episodes/view-tv-series-episodes',
+                    templateUrl: PARTIALS_DIRECTORY + '/episodes/view-tv-series-episodes',
                     controller: 'TvSeriesEpisodesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
                 .when('/tvSeries/:id/edit', {
-                    templateUrl: '/partials/tv-series/edit-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/edit-tv-series',
                     controller: 'EditTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/tvSeries/add', {
-                    templateUrl: '/partials/tv-series/add-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/add-tv-series',
                     controller: 'AddTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/tvSeries/:id', {
-                    templateUrl: '/partials/tv-series/details-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/details-tv-series',
                     controller: 'DetailsTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
                 .when('/tvSeries', {
-                    templateUrl: '/partials/tv-series/list-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/list-tv-series',
                     controller: 'TvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
                 .when('/users/register', {
-                    templateUrl: '/partials/account/register',
+                    templateUrl: PARTIALS_DIRECTORY + '/account/register',
                     controller: 'AuthenticationController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isNotAuthenticated
                 })
                 .when('/users/profile/:id/edit', {
-                    templateUrl: '/partials/account/edit-profile',
+                    templateUrl: PARTIALS_DIRECTORY + '/account/edit-profile',
                     controller: 'EditProfileController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/users/profile/:id', {
-                    templateUrl: '/partials/account/profile',
+                    templateUrl: PARTIALS_DIRECTORY + '/account/profile',
                     controller: 'ProfileController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/administration', {
-                    templateUrl: '/partials/administration/administration',
+                    templateUrl: PARTIALS_DIRECTORY + '/administration/administration',
                     controller: 'AdministrationController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isModeratorOrAdmin
                 })
                 .when('/', {
-                    templateUrl: '/partials/home/home',
+                    templateUrl: PARTIALS_DIRECTORY + '/home/home',
                     controller: 'HomeController',
                     controllerAs: CONTROLLER_VM_NAME
                 })
                 .otherwise({
-                    templateUrl: '/partials/home/home',
+                    templateUrl: PARTIALS_DIRECTORY + '/home/home',
                     controller: 'HomeController',
                     controllerAs: CONTROLLER_VM_NAME
                 });
