@@ -1,16 +1,14 @@
 (function() {
     'use strict';
 
-    function ProfileController($routeParams, $http, $location, toastr, moment, identity, constants, requestHelper) {
+    function ProfileController($routeParams, $location, toastr, moment, identity, constants, account) {
         var vm = this,
             userId = $routeParams.id;
         vm.identity = identity;
 
-        $http.get(`/api/users/${userId}`, {
-                headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-            })
+        account.getById(userId)
             .then(function(data) {
-                var user = data.data;
+                var user = data;
                 user.registrationDate = moment(user.registrationDate).format(constants.DEFAULT_DATE_FORMAT);
 
                 vm.currentUser = user;
@@ -22,5 +20,5 @@
     }
 
     angular.module('app')
-        .controller('ProfileController', ['$routeParams', '$http', '$location', 'toastr', 'moment', 'identity', 'constants', 'requestHelper', ProfileController]);
+        .controller('ProfileController', ['$routeParams', '$location', 'toastr', 'moment', 'identity', 'constants', 'account', ProfileController]);
 }());

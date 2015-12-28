@@ -11,7 +11,7 @@
             })
             .catch(function(err) {
                 console.log(err);
-                toastr.error('Can\'t unsubscribe from this TV Series. Try again later.');
+                toastr.error(err);
             });
     }
 

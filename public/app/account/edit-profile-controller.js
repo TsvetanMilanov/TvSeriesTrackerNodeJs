@@ -1,19 +1,15 @@
 (function() {
     'use strict';
 
-    function EditProfileController($http, $routeParams, $location, toastr, sha1, identity, requestHelper, constants) {
-        var vm = this;
+    function EditProfileController($routeParams, $location, toastr, sha1, identity, constants, account) {
+        var vm = this,
+            idOfUserToEdit = $routeParams.id;
+
         vm.identity = identity;
 
-        var currentUser = identity.currentUser,
-            idOfUserToEdit = $routeParams.id,
-            headers = requestHelper.createJsonHeadersObjectWithBearer(currentUser.token);
-
-        $http.get(`/api/users/${idOfUserToEdit}`, {
-                headers: headers
-            })
+        account.getById(idOfUserToEdit)
             .then(function(data) {
-                var userToEdit = data.data;
+                var userToEdit = data;
                 userToEdit.rolesJson = JSON.stringify(userToEdit.roles);
                 userToEdit.password = undefined;
 
@@ -39,11 +35,9 @@
 
                     editedUser.registrationDate = new Date(editedUser.registrationDate);
 
-                    $http.put(`/api/users/${editedUser._id}`, editedUser, {
-                            headers: headers
-                        })
+                    account.edit(editedUser)
                         .then(function(data) {
-                            var responseUser = data.data;
+                            var responseUser = data;
                             if (identity.currentUser.token == responseUser.token) {
                                 identity.currentUser = responseUser;
                             }
@@ -66,5 +60,5 @@
     }
 
     angular.module('app')
-        .controller('EditProfileController', ['$http', '$routeParams', '$location', 'toastr', 'sha1', 'identity', 'requestHelper', 'constants', EditProfileController]);
+        .controller('EditProfileController', ['$routeParams', '$location', 'toastr', 'sha1', 'identity', 'constants', 'account', EditProfileController]);
 }());

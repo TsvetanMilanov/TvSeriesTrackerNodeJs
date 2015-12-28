@@ -75,13 +75,13 @@
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/myTvSeriesWithNewEpisodes', {
-                    templateUrl: PARTIALS_DIRECTORY + '/tv-series/list-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/profile/my-tv-series-withnew-episodes',
                     controller: 'MyTvSeriesWithNewEpisodesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
                 })
                 .when('/myTvSeries', {
-                    templateUrl: PARTIALS_DIRECTORY + '/account/my-tv-series',
+                    templateUrl: PARTIALS_DIRECTORY + '/profile/my-tv-series',
                     controller: 'MyTvSeriesController',
                     controllerAs: CONTROLLER_VM_NAME,
                     resolve: routeAuthChecker.isAuthenticated
