@@ -64,7 +64,7 @@
             <div class="form-group" ng-if="vm.episode.airDate">
                 <label class="col-lg-2 control-label">Air Date</label>
                 <div class="col-lg-10">
-                    <span class="form-control">{{vm.episode.airDate}}</span>
+                    <span class="form-control">{{vm.episode.airDate | date: 'yyyy-MM-dd'}}</span>
                 </div>
             </div>
             <div class="form-group" ng-if="vm.episode.description">
