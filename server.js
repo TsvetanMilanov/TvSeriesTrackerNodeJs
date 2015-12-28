@@ -1,3 +1,4 @@
+/*globals process*/
 'use strict';
 let express = require('express'),
     mongooseConfig = require('./server/config/mongoose-config'),
@@ -5,7 +6,7 @@ let express = require('express'),
     passportConfig = require('./server/config/passport-config'),
     routeConfig = require('./server/config/routes'),
     app = express(),
-    port = 4000;
+    port = process.env.PORT || 4000;
 
 mongooseConfig.configure();
 passportConfig.configure();

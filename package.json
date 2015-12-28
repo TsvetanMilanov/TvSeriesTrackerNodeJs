@@ -1,29 +1,33 @@
 {
-  "name": "tv-series-tracker-node-js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs.git"
-  },
-  "author": "Tsvetan Milanov",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs/issues"
-  },
-  "homepage": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs#readme",
-  "dependencies": {
-    "body-parser": "^1.14.1",
-    "ejs": "^2.3.4",
-    "express": "^4.13.3",
-    "mongoose": "^4.2.9",
-    "passport": "^0.3.2",
-    "passport-http-bearer": "^1.0.1",
-    "rand-token": "^0.2.1",
-    "sha1": "^1.1.1"
-  }
+    "name": "tv-series-tracker-node-js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs.git"
+    },
+    "engines": {
+        "node": "4.2.x",
+        "npm": "2.14.x"
+    },
+    "author": "Tsvetan Milanov",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs/issues"
+    },
+    "homepage": "https://github.com/TsvetanMilanov/TvSeriesTrackerNodeJs#readme",
+    "dependencies": {
+        "body-parser": "^1.14.1",
+        "ejs": "^2.3.4",
+        "express": "^4.13.3",
+        "mongoose": "^4.2.9",
+        "passport": "^0.3.2",
+        "passport-http-bearer": "^1.0.1",
+        "rand-token": "^0.2.1",
+        "sha1": "^1.1.1"
+    }
 }
