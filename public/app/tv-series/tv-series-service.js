@@ -32,9 +32,14 @@
             return data.get(TV_SERIES_URL);
         }
 
+        function getLatestTvSeries() {
+            return data.get(TV_SERIES_URL + '/latest');
+        }
+
         return {
             getAll: getAll,
             getById: getById,
+            getLatestTvSeries: getLatestTvSeries,
             addTvSeries: addTvSeries,
             deleteTvSeries: deleteTvSeries,
             editTvSeries: editTvSeries,

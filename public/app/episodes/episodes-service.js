@@ -8,6 +8,10 @@
             return data.get(EPISODES_URL + '/' + id);
         }
 
+        function getLatestEpisodes() {
+            return data.get(EPISODES_URL + '/latest');
+        }
+
         function addEpisode(episode) {
             return data.post(EPISODES_URL, episode);
         }
@@ -30,6 +34,7 @@
 
         return {
             getById: getById,
+            getLatestEpisodes: getLatestEpisodes,
             addEpisode: addEpisode,
             deleteEpisode: deleteEpisode,
             editEpisode: editEpisode,

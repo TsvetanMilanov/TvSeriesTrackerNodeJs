@@ -54,6 +54,24 @@ module.exports = {
 
         });
     },
+    getLatest: function(req, res) {
+        TvSeries.find({})
+            .sort({
+                releaseDate: -1
+            })
+            .limit(10)
+            .exec(function(err, response) {
+                if (err) {
+                    res.status(500)
+                        .json({
+                            message: 'Can\'t load latest 10 TV Series.'
+                        });
+                    return;
+                }
+
+                res.json(response);
+            });
+    },
     createTvSeries: function(req, res) {
         let tvSeriesRequestModel = req.body;
 

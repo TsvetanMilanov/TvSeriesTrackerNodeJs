@@ -84,6 +84,28 @@ module.exports = {
             res.json(episode);
         });
     },
+    getLatest: function(req, res) {
+        Episode.find({
+                airDate: {
+                    $lte: new Date(Date.now())
+                }
+            })
+            .sort({
+                airDate: '-1'
+            })
+            .limit(10)
+            .exec(function(err, response) {
+                if (err) {
+                    res.status(500)
+                        .json({
+                            message: 'Can\'t get the latest episodes.'
+                        });
+                    return;
+                }
+
+                res.json(response);
+            });
+    },
     createEpisode: function(req, res) {
         let episodeRequestModel = req.body;
 
