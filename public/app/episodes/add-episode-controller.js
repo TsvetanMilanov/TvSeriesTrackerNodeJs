@@ -1,18 +1,15 @@
 (function() {
     'use strict';
 
-    function AddEpisodeController($http, $location, $routeParams, toastr, requestHelper, identity) {
+    function AddEpisodeController($location, $routeParams, toastr, identity, tvSeries, episodes) {
         var vm = this,
-            id = $routeParams.id,
-            config = {
-                headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-            };
+            id = $routeParams.id;
 
         vm.identity = identity;
 
-        $http.get(`/api/tvSeries/${id}`)
+        tvSeries.getById(id)
             .then(function(result) {
-                vm.tvSeries = result.data.tvSeries;
+                vm.tvSeries = result.tvSeries;
             })
             .catch(function(err) {
                 console.log(err);
@@ -21,10 +18,10 @@
 
         vm.addEpisode = function(model) {
             model.tvSeriesId = id;
-            $http.post('/api/episodes', model, config)
+            episodes.addEpisode(model)
                 .then(function(episode) {
                     toastr.success('Episode added.');
-                    $location.path(`episodes/${episode.data._id}`);
+                    $location.path(`episodes/${episode._id}`);
                 })
                 .catch(function() {
                     toastr.error('Can\'t save the new episode. Please try again.');
@@ -33,5 +30,5 @@
     }
 
     angular.module('app')
-        .controller('AddEpisodeController', ['$http', '$location', '$routeParams', 'toastr', 'requestHelper', 'identity', AddEpisodeController]);
+        .controller('AddEpisodeController', ['$location', '$routeParams', 'toastr', 'identity', 'tvSeries', 'episodes', AddEpisodeController]);
 }());

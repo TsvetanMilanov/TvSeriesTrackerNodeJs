@@ -1,28 +1,25 @@
 (function() {
     'use strict';
 
-    function EditEpisodeController($http, $location, $routeParams, toastr, requestHelper, identity) {
+    function EditEpisodeController($location, $routeParams, toastr, identity, tvSeries, episodes) {
         var vm = this,
             tvSeriesId = $routeParams.tvSeriesId,
-            episodeId = $routeParams.episodeId,
-            config = {
-                headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-            };
+            episodeId = $routeParams.episodeId;
 
         vm.identity = identity;
 
-        $http.get(`/api/tvSeries/${tvSeriesId}`)
-            .then(function(tvSeries) {
-                vm.tvSeries = tvSeries.data;
+        tvSeries.getById(tvSeriesId)
+            .then(function(response) {
+                vm.tvSeries = response.tvSeries;
             })
             .catch(function(err) {
                 console.log(err);
                 toastr.error('Can\'t load the TV Series information.');
             });
 
-        $http.get(`/api/episodes/${episodeId}`)
+        episodes.getById(episodeId)
             .then(function(episode) {
-                episode = episode.data;
+                episode = episode;
 
                 episode.airDate = new Date(episode.airDate);
 
@@ -34,10 +31,10 @@
             });
 
         vm.editEpisode = function(model) {
-            $http.put(`/api/episodes/${episodeId}`, model, config)
+            episodes.editEpisode(episodeId, model)
                 .then(function(episode) {
                     toastr.success('Episode edited.');
-                    $location.path(`episodes/${episode.data._id}`);
+                    $location.path(`episodes/${episode._id}`);
                 })
                 .catch(function() {
                     toastr.error('Can\'t edit the episode. Please try again.');
@@ -46,5 +43,5 @@
     }
 
     angular.module('app')
-        .controller('EditEpisodeController', ['$http', '$location', '$routeParams', 'toastr', 'requestHelper', 'identity', EditEpisodeController]);
+        .controller('EditEpisodeController', ['$location', '$routeParams', 'toastr', 'identity', 'tvSeries', 'episodes', EditEpisodeController]);
 }());

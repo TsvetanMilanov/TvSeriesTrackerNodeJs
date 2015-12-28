@@ -1,23 +1,23 @@
 (function() {
     'use strict';
 
-    function TvSeriesEpisodesController($http, $routeParams, toastr, identity) {
+    function TvSeriesEpisodesController($routeParams, toastr, identity, tvSeries, episodes) {
         var vm = this,
             id = $routeParams.id;
 
         vm.identity = identity;
 
-        $http.get(`/api/tvSeries/${id}`)
+        tvSeries.getById(id)
             .then(function(result) {
-                vm.tvSeries = result.data.tvSeries;
+                vm.tvSeries = result.tvSeries;
             })
             .catch(function() {
                 toastr.error('Can\'t find TV Series.');
             });
 
-        $http.get(`/api/episodes/forTvSeries/${id}`)
+        episodes.forTvSeries(id)
             .then(function(episodes) {
-                episodes = episodes.data;
+                episodes = episodes;
                 vm.episodes = episodes;
 
                 var seasons = [];
@@ -37,5 +37,5 @@
     }
 
     angular.module('app')
-        .controller('TvSeriesEpisodesController', ['$http', '$routeParams', 'toastr', 'identity', TvSeriesEpisodesController]);
+        .controller('TvSeriesEpisodesController', ['$routeParams', 'toastr', 'identity', 'tvSeries', 'episodes', TvSeriesEpisodesController]);
 }());

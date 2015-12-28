@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function AdministrationController($location, $http, toastr, identity, requestHelper, constants, reports) {
+    function AdministrationController($location, toastr, identity, constants, users, reports) {
         var vm = this;
 
         vm.identity = identity;
@@ -57,41 +57,32 @@
         };
 
         vm.getAllUsers = function() {
-            var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
-
             if (!identity.isAdmin() && !identity.isModerator()) {
                 toastr.error('You are not authorized to do that!!!');
                 $location.path('/');
                 return;
             }
 
-            $http.get('/api/users', {
-                    headers: headers
-                })
+            users.getAll()
                 .then(function(data) {
-                    console.log(data.data);
-                    vm.users = data.data;
+                    vm.users = data;
                 })
                 .catch(function(err) {
-                    toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err.data)}`);
+                    toastr.error(`There was an error while trying to get all users. ${JSON.stringify(err)}`);
                     $location.path('/');
                 });
         };
 
         vm.getBannedUsers = function() {
-            var headers = requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token);
-
             if (!identity.isAdmin() && !identity.isModerator()) {
                 toastr.error('You are not authorized to do that!!!');
                 $location.path('/');
                 return;
             }
 
-            $http.get('/api/users/banned', {
-                    headers: headers
-                })
+            users.getBanned()
                 .then(function(data) {
-                    vm.users = data.data;
+                    vm.users = data;
                 })
                 .catch(function(err) {
                     toastr.error(`There was an error while trying to get banned users. ${JSON.stringify(err)}`);
@@ -101,5 +92,5 @@
     }
 
     angular.module('app')
-        .controller('AdministrationController', ['$location', '$http', 'toastr', 'identity', 'requestHelper', 'constants', 'reports', AdministrationController]);
+        .controller('AdministrationController', ['$location', 'toastr', 'identity', 'constants', 'users', 'reports', AdministrationController]);
 }());

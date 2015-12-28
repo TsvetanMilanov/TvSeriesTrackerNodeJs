@@ -1,13 +1,10 @@
 (function() {
     'use strict';
 
-    function DeleteEpisodeController($http, $routeParams, $location, toastr, requestHelper, identity) {
-        var id = $routeParams.id,
-            config = {
-                headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-            };
+    function DeleteEpisodeController($routeParams, $location, toastr, episodes) {
+        var id = $routeParams.id;
 
-        $http.delete(`/api/episodes/${id}`, config)
+        episodes.deleteEpisode(id)
             .then(function() {
                 toastr.success('Episode deleted.');
                 $location.path('/');
@@ -19,5 +16,5 @@
     }
 
     angular.module('app')
-        .controller('DeleteEpisodeController', ['$http', '$routeParams', '$location', 'toastr', 'requestHelper', 'identity', DeleteEpisodeController]);
+        .controller('DeleteEpisodeController', ['$routeParams', '$location', 'toastr', 'episodes', DeleteEpisodeController]);
 }());

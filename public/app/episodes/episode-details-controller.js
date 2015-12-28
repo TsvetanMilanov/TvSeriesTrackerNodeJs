@@ -1,22 +1,22 @@
 (function() {
     'use strict';
 
-    function EpisodeDetailsController($http, $routeParams, toastr, identity) {
+    function EpisodeDetailsController($routeParams, toastr, identity, tvSeries, episodes) {
         var vm = this,
             id = $routeParams.id;
         vm.identity = identity;
 
-        $http.get(`/api/episodes/${id}`)
+        episodes.getById(id)
             .then(function(episode) {
-                episode = episode.data;
+                episode = episode;
 
                 episode.airDate = new Date(episode.airDate);
 
                 vm.episode = episode;
 
-                $http.get(`/api/tvSeries/${episode.tvSeriesId}`)
+                tvSeries.getById(episode.tvSeriesId)
                     .then(function(result) {
-                        let tvSeries = result.data.tvSeries;
+                        let tvSeries = result.tvSeries;
 
                         vm.tvSeries = tvSeries;
                     })
@@ -30,5 +30,5 @@
     }
 
     angular.module('app')
-        .controller('EpisodeDetailsController', ['$http', '$routeParams', 'toastr', 'identity', EpisodeDetailsController]);
+        .controller('EpisodeDetailsController', ['$routeParams', 'toastr', 'identity', 'tvSeries', 'episodes', EpisodeDetailsController]);
 }());
