@@ -60,7 +60,7 @@ module.exports = {
         if (!modelValidator.isTvSeriesRequestModelValid(tvSeriesRequestModel)) {
             res.status(400)
                 .json({
-                    message: 'The TV Series was not valid!'
+                    message: 'The TV Series information you have entered is not valid!'
                 });
 
             return;
@@ -73,7 +73,7 @@ module.exports = {
                 console.log(err);
                 res.status(400)
                     .json({
-                        message: 'The TV Series was not valid!'
+                        message: 'The TV Series information you have entered is not valid!'
                     });
 
                 return;
@@ -89,7 +89,7 @@ module.exports = {
         if (!modelValidator.isTvSeriesRequestModelValid(tvSeriesRequestModel)) {
             res.status(400)
                 .json({
-                    message: 'The TV Series was not valid!'
+                    message: 'The TV Series information you have entered is not valid!'
                 });
 
             return;

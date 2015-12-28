@@ -35,10 +35,6 @@ module.exports = {
             return false;
         }
 
-        if (model.type != constants.REPORT_TYPE_EPISODE || model.type != constants.REPORT_TYPE_TV_SERIES) {
-            return false;
-        }
-
         return true;
     },
     isEpisodeRequestModelValid: function(model) {
@@ -65,6 +61,10 @@ module.exports = {
         }
 
         if (model.description.length < constants.MIN_REPORT_DESCRIPTION_LENGTH) {
+            return false;
+        }
+
+        if (model.type != constants.REPORT_TYPE_EPISODE || model.type != constants.REPORT_TYPE_TV_SERIES) {
             return false;
         }
 
