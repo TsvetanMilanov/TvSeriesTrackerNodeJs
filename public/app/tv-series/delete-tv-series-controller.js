@@ -1,22 +1,18 @@
 (function() {
     'use strict';
 
-    function DeleteTvSeriesController($http, $location, $routeParams, toastr, requestHelper, identity) {
-        var config = {
-            headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-        };
-
-        $http.delete(`/api/tvSeries/${$routeParams.id}`, config)
+    function DeleteTvSeriesController($location, $routeParams, toastr, tvSeries) {
+        tvSeries.deleteTvSeries($routeParams.id)
             .then(function() {
                 toastr.success('TV Series deleted.');
                 $location.path('/');
             })
             .catch(function(err) {
                 console.log(err);
-                toastr.error('Can\'t delete the TV Series.');
+                toastr.error(err);
             });
     }
 
     angular.module('app')
-        .controller('DeleteTvSeriesController', ['$http', '$location', '$routeParams', 'toastr', 'requestHelper', 'identity', DeleteTvSeriesController]);
+        .controller('DeleteTvSeriesController', ['$location', '$routeParams', 'toastr', 'tvSeries', DeleteTvSeriesController]);
 }());

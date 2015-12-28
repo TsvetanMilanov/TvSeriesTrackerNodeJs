@@ -8,11 +8,16 @@
             return data.post(TV_SERIES_URL, model);
         }
 
+        function deleteTvSeries(id) {
+            return data.delete(TV_SERIES_URL + '/' + id);
+        }
+
         return {
-            addTvSeries: addTvSeries
+            addTvSeries: addTvSeries,
+            deleteTvSeries: deleteTvSeries
         };
     }
 
     angular.module('app')
-        .factory('tvSeries', ['$http', 'data', 'requestHelper', 'identity', tvSeriesService]);
+        .factory('tvSeries', ['$http', 'data', tvSeriesService]);
 }());
