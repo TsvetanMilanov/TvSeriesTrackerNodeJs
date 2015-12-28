@@ -1,24 +1,20 @@
 (function() {
     'use strict';
 
-    function SubscribeForTvSeriesController($http, $routeParams, $location, toastr, requestHelper, identity) {
-        var config = {
-            headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-        };
-
-        $http.post('/api/tvSeries/subscribe', {
+    function SubscribeForTvSeriesController($routeParams, $location, toastr, tvSeries) {
+        tvSeries.subscribe({
                 tvSeriesId: $routeParams.id
-            }, config)
+            })
             .then(function() {
-                toastr.success('You hav subscribed for this TV Series.');
+                toastr.success('You have been subscribed for this TV Series.');
                 $location.path('myTvSeries');
             })
             .catch(function(err) {
                 console.log(err);
-                toastr.error('Can\'t subscribe for this tv series. Try again later.');
+                toastr.error(err);
             });
     }
 
     angular.module('app')
-        .controller('SubscribeForTvSeriesController', ['$http', '$routeParams', '$location', 'toastr', 'requestHelper', 'identity', SubscribeForTvSeriesController]);
+        .controller('SubscribeForTvSeriesController', ['$routeParams', '$location', 'toastr', 'tvSeries', SubscribeForTvSeriesController]);
 }());

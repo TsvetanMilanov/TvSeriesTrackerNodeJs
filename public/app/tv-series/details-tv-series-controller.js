@@ -1,21 +1,20 @@
 (function() {
     'use strict';
 
-    function DetailsTvSeriesController($http, $routeParams, toastr, constants, identity) {
+    function DetailsTvSeriesController($routeParams, toastr, constants, identity, tvSeries) {
         var vm = this,
             id = $routeParams.id;
 
         vm.identity = identity;
 
-        $http.get(`/api/tvSeries/${id}`)
+        tvSeries.getById(id)
             .then(function(result) {
-                result = result.data;
                 let tvSeries = result.tvSeries;
 
                 tvSeries.releaseDate = new Date(tvSeries.releaseDate);
 
                 tvSeries.lastAiredEpisode = result.lastAiredEpisode;
-                
+
                 vm.tvSeries = tvSeries;
             })
             .catch(function() {
@@ -23,5 +22,5 @@
             });
     }
     angular.module('app')
-        .controller('DetailsTvSeriesController', ['$http', '$routeParams', 'toastr', 'constants', 'identity', DetailsTvSeriesController]);
+        .controller('DetailsTvSeriesController', ['$routeParams', 'toastr', 'constants', 'identity', 'tvSeries', DetailsTvSeriesController]);
 }());

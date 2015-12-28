@@ -191,11 +191,16 @@ module.exports = {
 
                 let firstEpisode = data[0];
 
-                UsersTvSeries.create({
+                let subscribeModel = {
                     userId: userId,
-                    tvSeriesId: tvSeriesId,
-                    lastWatchedEpisodeId: firstEpisode._id
-                }, function(err, data) {
+                    tvSeriesId: tvSeriesId
+                };
+
+                if (firstEpisode) {
+                    subscribeModel.lastWatchedEpisodeId = firstEpisode._id;
+                }
+
+                UsersTvSeries.create(subscribeModel, function(err, data) {
                     if (err) {
                         console.log(err);
                         res.status(400)

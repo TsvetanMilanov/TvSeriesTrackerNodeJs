@@ -16,8 +16,7 @@ module.exports = function() {
         },
         lastWatchedEpisodeId: {
             type: Schema.Types.ObjectId,
-            ref: 'Episode',
-            required: true
+            ref: 'Episode'
         }
     });
 

@@ -1,14 +1,14 @@
 (function() {
     'use strict';
 
-    function EditTvSeriesController($http, $location, $routeParams, toastr, requestHelper, identity) {
+    function EditTvSeriesController($location, $routeParams, toastr, identity, tvSeries) {
         var vm = this,
             id = $routeParams.id;
         vm.identity = identity;
 
-        $http.get(`/api/tvSeries/${id}`)
+        tvSeries.getById(id)
             .then(function(tvSeries) {
-                tvSeries = tvSeries.data;
+                tvSeries = tvSeries.tvSeries;
 
                 // tvSeries.releaseDateString = tvSeries.releaseDate.toString();
 
@@ -22,20 +22,18 @@
             });
 
         vm.editTvSeries = function(model) {
-            $http.put(`/api/tvSeries/${id}`, model, {
-                    headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-                })
+            tvSeries.editTvSeries(id, model)
                 .then(function(tvSeries) {
                     toastr.success('TV Series edited!');
-                    $location.path(`tvSeries/${tvSeries.data._id}`);
+                    $location.path(`tvSeries/${tvSeries._id}`);
                 })
                 .catch(function(err) {
                     console.log(err);
-                    toastr.error('Can\'t edit the TV Series please try again.');
+                    toastr.error(err);
                 });
         };
     }
 
     angular.module('app')
-        .controller('EditTvSeriesController', ['$http', '$location', '$routeParams', 'toastr', 'requestHelper', 'identity', EditTvSeriesController]);
+        .controller('EditTvSeriesController', ['$location', '$routeParams', 'toastr', 'identity', 'tvSeries', EditTvSeriesController]);
 }());

@@ -113,12 +113,18 @@ module.exports = {
                             let currentLastWatchedEpisode = {};
 
                             result.forEach(function(lastWatchedEpisode) {
-                                if (lastWatchedEpisode.tvSeriesId.toString() == episode.tvSeriesId.toString()) {
+                                if (lastWatchedEpisode &&
+                                    episode &&
+                                    lastWatchedEpisode.tvSeriesId &&
+                                    episode.tvSeriesId &&
+                                    lastWatchedEpisode.tvSeriesId.toString() == episode.tvSeriesId.toString()) {
                                     currentLastWatchedEpisode = lastWatchedEpisode.lastWatchedEpisodeId;
                                 }
                             });
 
-                            if (currentLastWatchedEpisode._id.toString() != episode._id.toString()) {
+                            if (episode &&
+                                currentLastWatchedEpisode &&
+                                currentLastWatchedEpisode._id.toString() != episode._id.toString()) {
                                 resultTvSeriesIds.push(episode.tvSeriesId);
                             }
                         });

@@ -1,13 +1,10 @@
 (function() {
     'use strict';
 
-    function UnsubscribeFromTvSeriesController($http, $routeParams, $location, toastr, requestHelper, identity) {
-        var tvSeriesId = $routeParams.id,
-            config = {
-                headers: requestHelper.createJsonHeadersObjectWithBearer(identity.currentUser.token)
-            };
+    function UnsubscribeFromTvSeriesController($routeParams, $location, toastr, tvSeries) {
+        var tvSeriesId = $routeParams.id;
 
-        $http.delete(`/api/tvSeries/unsubscribe/${tvSeriesId}`, config)
+        tvSeries.unsubscribe(tvSeriesId)
             .then(function() {
                 toastr.success('You have been successfuly unsubscribed from this TV Series.');
                 $location.path('myTvSeries');
@@ -19,5 +16,5 @@
     }
 
     angular.module('app')
-        .controller('UnsubscribeFromTvSeriesController', ['$http', '$routeParams', '$location', 'toastr', 'requestHelper', 'identity', UnsubscribeFromTvSeriesController]);
+        .controller('UnsubscribeFromTvSeriesController', ['$routeParams', '$location', 'toastr', 'tvSeries', UnsubscribeFromTvSeriesController]);
 }());

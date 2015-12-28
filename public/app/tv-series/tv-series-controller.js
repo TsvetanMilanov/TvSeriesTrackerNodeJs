@@ -1,12 +1,12 @@
 (function() {
     'use strict';
 
-    function TvSeriesController($http, toastr) {
+    function TvSeriesController(toastr, tvSeries) {
         var vm = this;
 
-        $http.get('/api/tvSeries')
+        tvSeries.getAll()
             .then(function(allTvSeries) {
-                vm.allTvSeries = allTvSeries.data;
+                vm.allTvSeries = allTvSeries;
             })
             .catch(function() {
                 toastr.error('Can\'t load TV Series.');
@@ -14,5 +14,5 @@
     }
 
     angular.module('app')
-        .controller('TvSeriesController', ['$http', 'toastr', TvSeriesController]);
+        .controller('TvSeriesController', ['toastr', 'tvSeries', TvSeriesController]);
 }());

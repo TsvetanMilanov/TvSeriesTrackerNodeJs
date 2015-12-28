@@ -12,9 +12,34 @@
             return data.delete(TV_SERIES_URL + '/' + id);
         }
 
+        function getById(id) {
+            return data.get(TV_SERIES_URL + '/' + id);
+        }
+
+        function editTvSeries(id, model) {
+            return data.put(TV_SERIES_URL + '/' + id, model);
+        }
+
+        function subscribe(model) {
+            return data.post(TV_SERIES_URL + '/subscribe', model);
+        }
+
+        function unsubscribe(id) {
+            return data.delete(TV_SERIES_URL + '/unsubscribe/' + id);
+        }
+
+        function getAll() {
+            return data.get(TV_SERIES_URL);
+        }
+
         return {
+            getAll: getAll,
+            getById: getById,
             addTvSeries: addTvSeries,
-            deleteTvSeries: deleteTvSeries
+            deleteTvSeries: deleteTvSeries,
+            editTvSeries: editTvSeries,
+            subscribe: subscribe,
+            unsubscribe: unsubscribe
         };
     }
 
