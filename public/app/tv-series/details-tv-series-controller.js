@@ -6,10 +6,12 @@
             id = $routeParams.id;
 
         vm.identity = identity;
+        vm.showButtonsBar = false;
 
         tvSeries.getById(id)
             .then(function(result) {
                 let tvSeries = result.tvSeries;
+                vm.showButtonsBar = true;
 
                 tvSeries.releaseDate = new Date(tvSeries.releaseDate);
 

@@ -5,9 +5,11 @@
         var vm = this,
             id = $routeParams.id;
         vm.identity = identity;
+        vm.showButtonsBar = false;
 
         episodes.getById(id)
             .then(function(episode) {
+                vm.showButtonsBar = true;
                 episode = episode;
 
                 episode.airDate = new Date(episode.airDate);

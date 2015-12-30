@@ -16,7 +16,7 @@
                                     <a class="navbar-brand" href="#/tvSeries/{{vm.tvSeries._id}}">{{vm.tvSeries.title}}</a>
                                 </div>
 
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3" ng-if="vm.showButtonsBar">
                                     <ul class="nav navbar-nav">
                                         <li class="margin-left-1">
                                             <a href="#/episodes/{{vm.tvSeries._id}}/edit/{{vm.episode._id}}/setLastWatchedEpisode" class="btn btn-success" ng-if="vm.identity.isAuthenticated()">Set As Last Watched</a>
