@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="font-size-16" ng-repeat="episode in vm.episodes | filter: {title: titleFilter} | filterBySeasonNumber: selectedSeason | orderBy: '-airDate'">
+        <tr class="font-size-16" ng-repeat="episode in vm.episodes | filter: {title: titleFilter} | filterBySeasonNumber: selectedSeason | orderBy: ['seasonNumber', 'number']">
             <td>{{$index + 1}}</td>
             <td><a href="#/episodes/{{episode._id}}">{{episode.title}}</a></td>
             <td>{{episode.seasonNumber}}</td>
