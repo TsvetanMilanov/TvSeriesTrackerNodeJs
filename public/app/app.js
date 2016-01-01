@@ -5,7 +5,7 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('sha1', sha1)
-        .constant('baseUrl', 'http://tv-series-tracker.herokuapp.com')
+        .constant('baseUrl', 'https://tv-series-tracker.herokuapp.com')
         //.constant('baseUrl', 'http://localhost:4000')
         .config(function($routeProvider) {
             var routeAuthChecker = {
