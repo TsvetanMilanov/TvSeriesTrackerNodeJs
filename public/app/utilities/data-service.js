@@ -13,6 +13,16 @@
             };
         }
 
+        function rejectPromiseWithError(defered, err) {
+            if (!err.data) {
+                defered.reject('There is an error on the server. Please try again later.');
+            } else if (err.data.message) {
+                defered.reject(err.data.message);
+            } else {
+                defered.reject(err.data);
+            }
+        }
+
         function getRequest(url, query) {
             var defered = $q.defer(),
                 authHeader = getAuthorizationHeader();
@@ -24,11 +34,7 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    if (err.data.message) {
-                        defered.reject(err.data.message);
-                    } else {
-                        defered.reject(err.data);
-                    }
+                    rejectPromiseWithError(defered, err);
                 });
 
             return defered.promise;
@@ -43,11 +49,7 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    if (err.data.message) {
-                        defered.reject(err.data.message);
-                    } else {
-                        defered.reject(err.data);
-                    }
+                    rejectPromiseWithError(defered, err);
                 });
 
             return defered.promise;
@@ -62,11 +64,7 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    if (err.data.message) {
-                        defered.reject(err.data.message);
-                    } else {
-                        defered.reject(err.data);
-                    }
+                    rejectPromiseWithError(defered, err);
                 });
 
             return defered.promise;
@@ -81,7 +79,7 @@
                 .then(function(response) {
                     defered.resolve(response.data);
                 }, function(err) {
-                    defered.reject(err.data);
+                    rejectPromiseWithError(defered, err);
                 });
 
             return defered.promise;
