@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function EditProfileController($routeParams, $location, toastr, sha1, identity, constants, account) {
+    function EditProfileController($routeParams, $location, $window, toastr, sha1, identity, constants, account) {
         var vm = this,
             idOfUserToEdit = $routeParams.id;
 
@@ -37,9 +37,15 @@
 
                     account.edit(editedUser)
                         .then(function(data) {
-                            var responseUser = data;
-                            if (identity.currentUser.token == responseUser.token) {
+                            var responseUser = data.user,
+                                shouldChangeToken = data.shouldChangeToken;
+                            if (identity.currentUser.token == responseUser.token && !shouldChangeToken) {
                                 identity.currentUser = responseUser;
+                            }
+
+                            if (shouldChangeToken) {
+                                identity.currentUser = responseUser;
+                                $window.localStorage.setItem(constants.CURRENT_USER_LOCAL_STORAGE_KEY, JSON.stringify(responseUser));
                             }
 
                             vm.identity = identity;
@@ -60,5 +66,5 @@
     }
 
     angular.module('app')
-        .controller('EditProfileController', ['$routeParams', '$location', 'toastr', 'sha1', 'identity', 'constants', 'account', EditProfileController]);
+        .controller('EditProfileController', ['$routeParams', '$location', '$window', 'toastr', 'sha1', 'identity', 'constants', 'account', EditProfileController]);
 }());

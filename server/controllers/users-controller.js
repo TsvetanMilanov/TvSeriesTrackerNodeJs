@@ -204,19 +204,6 @@ module.exports = {
                 return;
             }
 
-            if (requestUser.password) {
-                if (requestUser.password.length < constants.MIN_PASSWORD_LENGTH) {
-                    res.status(400)
-                        .json({
-                            message: `Password must have at least ${constants.MIN_PASSWORD_LENGTH} symbols!`
-                        });
-
-                    return;
-                }
-
-                databaseUser.password = sha1(requestUser.password);
-            }
-
             databaseUser.firstName = requestUser.firstName || databaseUser.firstName;
             databaseUser.lastName = requestUser.lastName || databaseUser.lastName;
 
@@ -257,14 +244,55 @@ module.exports = {
             databaseUser.isBanned = requestUser.isBanned;
             databaseUser.token = requestUser.token || databaseUser.token;
 
-            databaseUser.save(function(err, savedUser) {
-                if (err) {
-                    next(err.message);
+            if (requestUser.password) {
+                if (requestUser.password.length < constants.MIN_PASSWORD_LENGTH) {
+                    res.status(400)
+                        .json({
+                            message: `Password must have at least ${constants.MIN_PASSWORD_LENGTH} symbols!`
+                        });
+
                     return;
                 }
 
-                res.json(mapper.mapToUserResponseModel(savedUser));
-            });
+                if (databaseUser.password != requestUser.password) {
+                    databaseUser.password = sha1(requestUser.password);
+
+                    identity.generateToken(databaseUser)
+                        .then(function(data) {
+                            databaseUser.token = data.token.token;
+                            databaseUser.save(function(err, savedUser) {
+                                if (err) {
+                                    next(err.message);
+                                    return;
+                                }
+
+                                res.json({
+                                    shouldChangeToken: true,
+                                    user: mapper.mapToUserResponseModel(savedUser)
+                                });
+                            });
+                        })
+                        .catch(function(err) {
+                            res.status(500)
+                                .json({
+                                    message: `Can't create new token for ${databaseUser.userName}.`,
+                                    err: err
+                                });
+                        });
+                } else {
+                    databaseUser.save(function(err, savedUser) {
+                        if (err) {
+                            next(err.message);
+                            return;
+                        }
+
+                        res.json({
+                            shouldChangeToken: false,
+                            user: mapper.mapToUserResponseModel(savedUser)
+                        });
+                    });
+                }
+            }
         });
     },
     getBannedUsers: function(req, res, next) {
